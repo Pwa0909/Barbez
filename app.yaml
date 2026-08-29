@@ -2,3 +2,22 @@ kind: wasmer.io/App.v0
 name: barberz
 owner: pwa0909
 package: .
+app_id: da_KD4Iat7UJ84g
+env:
+  PHPIX_PHP_THREADS: '4'
+
+annotations:
+  anybuild.run/config:
+    composer_build_script: post-update-cmd
+    composer_enable: true
+    name: out
+    node_build_command: npm run build
+    node_install_inputs:
+    - package.json
+    node_package_manager: npm
+    php_framework: laravel
+    php_public_dir: public
+    phpix: true
+  anybuild.run/provider: laravel
+  anybuild.run/version: 0.28.0
+  wasmer.io/version: 7.3.0
