@@ -12,32 +12,33 @@ class HorarioDisponivelSeeder extends Seeder
     {
         $horarios = [];
  
-       
         $barbeiros = [1, 2, 3];
-        $horasDia  = ['08:00', '09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
- 
+        $start = Carbon::parse('07:00');
+        $end = Carbon::parse('17:00');
+
         for ($dia = 0; $dia <= 6; $dia++) {
             $data = Carbon::today()->addDays($dia)->toDateString();
- 
-            // Pula domingo
+
             if (Carbon::parse($data)->dayOfWeek === Carbon::SUNDAY) {
                 continue;
             }
- 
+
             foreach ($barbeiros as $barbeiroId) {
-                foreach ($horasDia as $hora) {
+                $current = $start->copy();
+                while ($current->lte($end)) {
                     $horarios[] = [
                         'barbeiro_id' => $barbeiroId,
                         'data'        => $data,
-                        'hora'        => $hora,
+                        'hora'        => $current->format('H:i'),
                         'disponivel'  => 1,
                     ];
+                    $current->addMinutes(30);
                 }
             }
         }
- 
+
         DB::table('horarios_disponiveis')->insert($horarios);
- 
+
         $this->command->info('✅ Horários disponíveis criados: ' . count($horarios));
     }
 }

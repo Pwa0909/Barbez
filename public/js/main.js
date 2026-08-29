@@ -240,7 +240,11 @@ jQuery(document).ready(function($) {
 	var siteDatePicker = function() {
 
 		if ( $('.datepicker').length > 0 ) {
-			$('.datepicker').datepicker();
+			$('.datepicker').each(function () {
+				if (!$(this).data('datepicker')) {
+					$(this).datepicker();
+				}
+			});
 		}
 
 	};

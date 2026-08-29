@@ -650,14 +650,22 @@
   <!-- NAVBAR -->
   <nav class="navbar-bp" id="navbar">
     <div class="container">
-      <a href="index.html" class="nav-logo">BarberPoint</a>
+      <a href="{{ route('welcome') }}" class="nav-logo">BarberPoint</a>
       <ul class="nav-links">
-        <li><a href="index.html">Início</a></li>
         <li><a href="{{ route('servicos') }}">Serviços</a></li>
-        <li><a href="{{ route('agendamentos') }}">Agendamentos</a></li>
-        
+        @if(auth()->guard('cliente')->check())
+          <li><a href="{{ route('agendamentos') }}">Agendamentos</a></li>
+        @else
+          <li><a href="{{ route('cliente.login') }}">Agendamentos</a></li>
+        @endif
+        <li><a href="{{ route('cliente.register') }}">Cadastrar</a></li>
+        <li><a href="{{ route('admin.login') }}">Admin</a></li>
       </ul>
-      <a href="{{ route('agendamentos') }}" class="nav-cta">Agendar</a>
+      @if(auth()->guard('cliente')->check())
+        <a href="{{ route('agendamentos') }}" class="nav-cta">Agendar</a>
+      @else
+        <a href="{{ route('cliente.login') }}" class="nav-cta">Agendar</a>
+      @endif
     </div>
   </nav>
 
@@ -671,7 +679,11 @@
         <h1>Mais do que<br>um <em>corte</em>,<br>uma experiência.</h1>
         <p>Tradição, estilo e cuidado em cada detalhe. Seu visual, nossa arte.</p>
         <div class="hero-actions">
-          <a href="{{ route('agendamentos') }}" class="btn-gold">Agendar Horário</a>
+          @if(auth()->guard('cliente')->check())
+            <a href="{{ route('agendamentos') }}" class="btn-gold">Agendar Horário</a>
+          @else
+            <a href="{{ route('cliente.login') }}" class="btn-gold">Agendar Horário</a>
+          @endif
           <a href="{{ route('servicos') }}" class="btn-outline">Ver Serviços</a>
         </div>
       </div>

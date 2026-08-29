@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
                 'name'              => 'Admin Barbearia',
                 'email'             => 'admin@barbearia.com',
                 'email_verified_at' => Carbon::now(),
-                'password'          => Hash::make('password'),
+                'password'          => Hash::make('pwapwa'),
                 'remember_token'    => null,
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now(),

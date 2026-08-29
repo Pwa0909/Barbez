@@ -7,28 +7,42 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Executa a migration.
      */
     public function up(): void
     {
         Schema::create('agendamentos', function (Blueprint $table) {
             $table->id();
 
-            
-            $table->foreignId('cliente_id')->constrained('clientes')->cascadeOnDelete();
-            $table->foreignId('barbeiro_id')->constrained('barbeiros')->cascadeOnDelete();
-            $table->foreignId('servico_id')->constrained('servicos')->cascadeOnDelete();
+            $table->foreignId('cliente_id')
+                ->constrained('clientes')
+                ->cascadeOnDelete();
+
+            $table->foreignId('barbeiro_id')
+                ->constrained('barbeiros')
+                ->cascadeOnDelete();
+
+            $table->foreignId('servico_id')
+                ->constrained('servicos')
+                ->cascadeOnDelete();
+
+            $table->foreignId('horario_disponivel_id')
+                ->constrained('horarios_disponiveis')
+                ->cascadeOnDelete();
 
             $table->date('data');
             $table->time('hora');
-            $table->string('status', 50)->nullable();
+
+            $table->string('status', 50)->default('Agendado');
+
             $table->text('observacoes')->nullable();
-            $table->timestamp('criado_em')->useCurrent();
+
+            $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverte a migration.
      */
     public function down(): void
     {

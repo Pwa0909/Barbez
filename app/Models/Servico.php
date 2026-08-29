@@ -8,6 +8,13 @@ class Servico extends Model
 {
     protected $fillable = [
         'nome',
-        'preco'
+        'descricao',
+        'preco',
+        'duracao_min'
     ];
+
+    public function agendamentos()
+    {
+        return $this->hasMany(Agendamento::class);
+    }
 }
