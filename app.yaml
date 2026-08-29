@@ -1,0 +1,4 @@
+kind: wasmer.io/App.v0
+name: barberz
+owner: pwa0909
+package: .
