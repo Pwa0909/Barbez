@@ -7,7 +7,7 @@
 {{-- ═══ PAGE HEADER ═══ --}}
 <div class="position-relative text-center py-5 mb-5"
      style="background: linear-gradient(135deg,rgba(10,10,10,.92) 40%,rgba(10,10,10,.7)),
-            url('/images/hero_1.jpg') center/cover no-repeat;
+            url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             border-bottom: 1px solid rgba(201,168,76,.15);">
   <div class="container py-4">
     <div class="section-label justify-content-center mb-3">BarberPoint</div>

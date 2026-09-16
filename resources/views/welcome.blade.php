@@ -103,6 +103,21 @@
       transition: background 0.2s, transform 0.2s;
     }
     .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .about-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 220px;
+      padding: 1.1rem 1.5rem;
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 1rem;
+      background: rgba(10,10,10,0.6);
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-size: 1.6rem;
+    }
 
     /* ── HERO ── */
     .hero {
@@ -116,7 +131,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background-image: url('images/hero_1.jpg');
+      background-image: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1600&q=80');
       background-size: cover;
       background-position: center;
       opacity: 0.25;
@@ -518,7 +533,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url('images/hero_2.jpg');
+      background-image: url('https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=1600&q=80');
       background-size: cover;
       background-position: center;
       opacity: 0.1;
@@ -699,7 +714,7 @@
     <div class="container">
       <div class="about-grid">
         <div class="about-img-wrap">
-          <img src="assets/img/logo.png" alt="Barbearia BarberPoint">
+          <div class="about-logo" aria-label="Barbearia BarberPoint">BarberPoint</div>
           <div class="about-badge">
             <strong>3</strong>
             <span>Anos de excelência</span>
@@ -772,7 +787,7 @@
       <div class="pricing-grid">
         <div class="pricing-card">
           <div class="pricing-card-header">
-            <img src="images/img_1.jpg" alt="Cortes">
+            <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=80" alt="Cortes">
             <div class="pricing-card-header-title"><h3>Corte de Cabelo</h3></div>
           </div>
           <div class="pricing-card-body">
@@ -792,7 +807,7 @@
         </div>
         <div class="pricing-card">
           <div class="pricing-card-header">
-            <img src="images/img_3.jpg" alt="Combos">
+            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="Combos">
             <div class="pricing-card-header-title"><h3>Combos</h3></div>
           </div>
           <div class="pricing-card-body">
@@ -830,7 +845,7 @@
         <div class="testimonial-card">
           <p>Melhor barbearia da cidade, sem dúvida. Atendimento impecável e o corte ficou exatamente do jeito que eu pedi. Já sou cliente fiel há mais de dois anos.</p>
           <div class="testimonial-author">
-            <img src="images/person_1.jpg" alt="Mike Fisher" class="testimonial-avatar">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" alt="Mike Fisher" class="testimonial-avatar">
             <div>
               <div class="testimonial-name">Mike Fisher</div>
               <div class="testimonial-stars">★★★★★</div>
@@ -840,7 +855,7 @@
         <div class="testimonial-card">
           <p>O ambiente é incrível, o atendimento é excelente e o resultado é sempre perfeito. Recomendo a todos que buscam qualidade de verdade.</p>
           <div class="testimonial-author">
-            <img src="images/person_2.jpg" alt="Jean Stanley" class="testimonial-avatar">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80" alt="Jean Stanley" class="testimonial-avatar">
             <div>
               <div class="testimonial-name">Jean Stanley</div>
               <div class="testimonial-stars">★★★★★</div>
@@ -850,7 +865,7 @@
         <div class="testimonial-card">
           <p>Profissionais que realmente entendem do que fazem. A barba ficou impecável e o corte perfeito. Já indiquei para toda a família.</p>
           <div class="testimonial-author">
-            <img src="images/person_3.jpg" alt="Katie Rose" class="testimonial-avatar">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80" alt="Katie Rose" class="testimonial-avatar">
             <div>
               <div class="testimonial-name">Katie Rose</div>
               <div class="testimonial-stars">★★★★★</div>

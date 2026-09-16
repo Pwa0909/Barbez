@@ -30,7 +30,7 @@
 
 <style>
     .success-page { min-height:70vh; background:#0b0b0b; color:#F5F0E8 !important; }
-    .success-hero { background: linear-gradient(135deg, rgba(10,10,10,.96), rgba(10,10,10,.72)), url('/images/hero_2.jpg') center/cover no-repeat; border-bottom: 1px solid rgba(201,168,76,.15); }
+    .success-hero { background: linear-gradient(135deg, rgba(10,10,10,.96), rgba(10,10,10,.72)), url('https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; border-bottom: 1px solid rgba(201,168,76,.15); }
     .section-label { display:inline-flex; align-items:center; gap:10px; font-size:.7rem; font-weight:500; letter-spacing:4px; text-transform:uppercase; color:#C9A84C; }
     .section-label::before { content:''; width:28px; height:1px; background:#C9A84C; }
     .font-serif { font-family:'Playfair Display', Georgia, serif; }

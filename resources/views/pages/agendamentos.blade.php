@@ -3,7 +3,7 @@
 @section('title', 'Agendar Horário')
 
 @section('content')
-<div class="position-relative text-center py-5 mb-5" style="background: linear-gradient(135deg,rgba(10,10,10,.92) 40%,rgba(10,10,10,.7)),url('/images/hero_2.jpg') center/cover no-repeat;border-bottom: 1px solid rgba(201,168,76,.15);">
+<div class="position-relative text-center py-5 mb-5" style="background: linear-gradient(135deg,rgba(10,10,10,.92) 40%,rgba(10,10,10,.7)),url('https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;border-bottom: 1px solid rgba(201,168,76,.15);">
     <div class="container py-4">
         <div class="section-label justify-content-center mb-3">BarberPoint</div>
         <h1 class="font-serif fw-bold text-white mb-3" style="font-size:clamp(2.2rem,5vw,3.5rem);">Agendar Horário</h1>
@@ -116,13 +116,85 @@
     .bg-dark { background: #070707 !important; }
     .shadow-dark { box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45); }
     .alert-danger { background: #2c0505; border-color: #600000; color: #f8d7da; }
+    .alert-secondary {
+        background: rgba(201, 168, 76, 0.08);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        color: #efe6d2;
+        border-radius: 1rem;
+    }
+    .agendamento-form {
+        background: linear-gradient(180deg, rgba(15,15,15,0.98), rgba(10,10,10,0.95));
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow: 0 24px 60px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.04);
+        border-radius: 1.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+    .agendamento-form::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto auto 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, rgba(201,168,76,0.9), transparent);
+    }
+    .selected-day {
+        font-size: 0.96rem;
+        color: rgba(245,240,232,0.9);
+    }
+    .selected-day span {
+        color: #f2d58e;
+        font-weight: 600;
+    }
     .horario-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.9rem; }
-    .horario-card { display: block; cursor: pointer; background: #090909; border: 1px solid rgba(255,255,255,.08); border-radius: 1rem; padding: 1rem; transition: transform .2s, border-color .2s, background .2s, box-shadow .2s; }
-    .calendar-box { background: rgba(255,255,255,.03); }
-    .horario-card:hover { transform: translateY(-2px); border-color: rgba(201,168,76,.6); background: rgba(201,168,76,.04); }
-    .horario-card.selected, .horario-card input:checked + .horario-card-content { border-color: rgba(201,168,76,.8); box-shadow: 0 0 0 3px rgba(201,168,76,.08); }
+    .horario-card {
+        display: block;
+        cursor: pointer;
+        background: linear-gradient(180deg, rgba(11,11,11,0.92), rgba(18,18,18,0.92));
+        border: 1px solid rgba(255,255,255,.08);
+        border-radius: 1rem;
+        padding: 1rem;
+        transition: transform .2s, border-color .2s, background .2s, box-shadow .2s;
+        position: relative;
+        overflow: hidden;
+    }
+    .horario-card::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(201,168,76,0.8), transparent);
+        opacity: 0;
+        transition: opacity .2s ease;
+    }
+    .calendar-box {
+        background: rgba(255,255,255,.025);
+        border: 1px solid rgba(201,168,76,0.14);
+        border-radius: 1.2rem;
+    }
+    .horario-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(201,168,76,.6);
+        background: rgba(201,168,76,.04);
+        box-shadow: 0 12px 26px rgba(0,0,0,0.18);
+    }
+    .horario-card:hover::before,
+    .horario-card.selected::before,
+    .horario-card input:checked + .horario-card-content::before {
+        opacity: 1;
+    }
+    .horario-card.selected, .horario-card input:checked + .horario-card-content {
+        border-color: rgba(201,168,76,.8);
+        box-shadow: 0 0 0 3px rgba(201,168,76,.08);
+        background: rgba(201,168,76,.04);
+    }
     .horario-card input { display: none; }
-    .horario-card-content { display: grid; gap: 0.35rem; }
+    .horario-card-content {
+        display: grid;
+        gap: 0.35rem;
+        position: relative;
+        z-index: 1;
+    }
     .horario-card-top { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; }
     .horario-day { font-size: .9rem; color: rgba(245,240,232,.75); }
     .horario-time { font-size: 1.1rem; font-weight: 700; color: #fff; }
@@ -133,10 +205,20 @@
         width: 100%;
         max-width: 100%;
         background: rgba(12, 12, 12, 0.96);
-        border: 1px solid rgba(201, 168, 76, 0.2);
+        border: 1px solid rgba(201, 168, 76, 0.18);
         border-radius: 1.2rem;
         padding: 1rem;
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+    }
+
+    @media (max-width: 576px) {
+        .agendamento-form {
+            padding: 1.2rem !important;
+        }
+
+        .horario-card {
+            padding: 0.85rem;
+        }
     }
 
     #horario-datepicker .datepicker table {
@@ -237,18 +319,27 @@
             return;
         }
 
-        window.__barberzDatepickers = window.__barberzDatepickers || {};
-
         var $picker = $('#horario-datepicker');
-        $('.datepicker').not($picker.find('.datepicker')).remove();
+        var $existingDatepickers = $('.datepicker').not($picker.find('.datepicker'));
+
+        if ($existingDatepickers.length) {
+            $existingDatepickers.each(function () {
+                var $dp = $(this);
+                if ($dp.data('datepicker')) {
+                    $dp.datepicker('remove');
+                }
+                $dp.remove();
+            });
+        }
+
         if ($picker.data('datepicker')) {
             $picker.datepicker('remove');
         }
 
-        if (window.__barberzDatepickers['horario-datepicker']) {
+        if (window.__barberzDatepickerInitialized) {
             return;
         }
-        window.__barberzDatepickers['horario-datepicker'] = true;
+        window.__barberzDatepickerInitialized = true;
 
         var selectedDate = null;
         var $cards = $('.horario-card');
