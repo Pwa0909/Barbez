@@ -324,9 +324,10 @@
         }
 
         var $picker = $('#horario-datepicker');
+
         $('.datepicker').each(function () {
             var $dp = $(this);
-            if (!$dp.closest('#horario-datepicker').length && !$dp.is($picker)) {
+            if (!$dp.is($picker) && !$dp.closest('#horario-datepicker').length) {
                 if ($dp.data('datepicker')) {
                     $dp.datepicker('remove');
                 }
@@ -334,14 +335,16 @@
             }
         });
 
+        $picker.find('.datepicker').remove();
+
+        if ($picker.attr('data-barberz-initialized') === 'true') {
+            return;
+        }
+        $picker.attr('data-barberz-initialized', 'true');
+
         if ($picker.data('datepicker')) {
             $picker.datepicker('remove');
         }
-
-        if (window.__barberzDatepickerInitialized) {
-            return;
-        }
-        window.__barberzDatepickerInitialized = true;
 
         var selectedDate = null;
         var $cards = $('.horario-card');
