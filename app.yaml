@@ -16,7 +16,7 @@ jobs:
   trigger: post-deployment
   action:
     execute:
-      command: php artisan migrate --force && php artisan db:seed --class=HorarioDisponivelSeeder --force
+      command: after_deploy
 annotations:
   anybuild.run/config:
     composer_build_script: post-update-cmd
