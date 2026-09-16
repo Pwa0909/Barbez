@@ -4,6 +4,7 @@
   <title>BarberPoint — Barbearia Premium</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/svg+xml" href="{{ asset('favicon-scissors.svg') }}">
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 

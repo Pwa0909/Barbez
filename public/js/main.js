@@ -239,8 +239,10 @@ jQuery(document).ready(function($) {
 
 	var siteDatePicker = function() {
 
-		if ( $('.datepicker').length > 0 ) {
-			$('.datepicker').each(function () {
+		var $datepickers = $('.datepicker').not('#horario-datepicker');
+
+		if ( $datepickers.length > 0 ) {
+			$datepickers.each(function () {
 				if (!$(this).data('datepicker')) {
 					$(this).datepicker();
 				}

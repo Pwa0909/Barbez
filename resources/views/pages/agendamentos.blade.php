@@ -68,11 +68,11 @@
                     </div>
                     <div class="horario-options">
                         @forelse($horarios as $horario)
-                            <label class="horario-card {{ old('horario_disponivel_id') == $horario->id ? 'selected' : '' }} d-none" data-date="{{ $horario->data }}">
+                            <label class="horario-card {{ old('horario_disponivel_id') == $horario->id ? 'selected' : '' }} d-none" data-date="{{ \Illuminate\Support\Carbon::parse($horario->data)->format('Y-m-d') }}">
                                 <input type="radio" name="horario_disponivel_id" value="{{ $horario->id }}" required hidden {{ old('horario_disponivel_id') == $horario->id ? 'checked' : '' }}>
                                 <div class="horario-card-content">
                                     <div class="horario-card-top">
-                                        <span class="horario-day">{{ date('d/m/Y', strtotime($horario->data)) }}</span>
+                                        <span class="horario-day">{{ \Illuminate\Support\Carbon::parse($horario->data)->format('d/m/Y') }}</span>
                                         <span class="horario-time">{{ date('H:i', strtotime($horario->hora)) }}</span>
                                     </div>
                                     <div class="horario-note">Escolha este horário</div>
@@ -151,11 +151,24 @@
         $picker.off('changeDate.barberzDatepicker');
 
         if ($picker.data('datepicker')) {
-            $picker.datepicker('remove');
+            return;
         }
+
+        $.fn.datepicker.dates['pt-BR'] = {
+            days: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'],
+            daysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+            daysMin: ['Do', 'Se', 'Te', 'Qa', 'Qi', 'Se', 'Sá'],
+            months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            today: 'Hoje',
+            clear: 'Limpar',
+            titleFormat: 'MM yyyy',
+            weekStart: 0
+        };
 
         $picker.datepicker({
             format: 'yyyy-mm-dd',
+            language: 'pt-BR',
             todayHighlight: true,
             autoclose: true,
             startDate: new Date()
@@ -164,7 +177,7 @@
             var visibleCount = 0;
 
             $cards.each(function () {
-                var cardDate = $(this).data('date');
+                var cardDate = String($(this).attr('data-date'));
                 var show = cardDate === selectedDate;
                 $(this).toggleClass('d-none', !show);
                 if (show) {
@@ -192,6 +205,14 @@
             $(this).find('input').prop('checked', true);
             $cards.removeClass('selected');
             $(this).addClass('selected');
+        });
+
+        $('form[action="{{ route('agendamentos.store') }}"]').on('submit', function (event) {
+            if (!$('input[name="horario_disponivel_id"]:checked').length) {
+                event.preventDefault();
+                $('#horario-no-results').removeClass('d-none').text('Selecione um horário antes de confirmar o agendamento.');
+                $('#horario-times-screen').removeClass('d-none');
+            }
         });
 
         function formatDate(value) {
