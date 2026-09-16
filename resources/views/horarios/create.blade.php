@@ -1,9 +1,9 @@
-@extends('layout.app')
+@extends('layout.admin')
 
 @section('title', 'Cadastrar Horário')
 
 @section('content')
-<div class="container py-5">
+<div class="admin-page">
     <h1 class="mb-4">Cadastrar Horário</h1>
 
     @if($errors->any())

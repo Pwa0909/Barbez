@@ -20,7 +20,7 @@
                         @if(auth()->guard('cliente')->check())
                             <li><a href="{{ route('agendamentos') }}">Agendamentos</a></li>
                         @else
-                            <li><a href="{{ route('cliente.login') }}">Agendamentos</a></li>
+                            <li><a href="{{ route('login') }}">Agendamentos</a></li>
                         @endif
 
                         @if(auth()->guard('web')->check())
@@ -38,7 +38,7 @@
                                 </form>
                             </li>
                         @else
-                            <li><a href="{{ route('cliente.login') }}">Login Cliente</a></li>
+                            <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('cliente.register') }}">Cadastrar</a></li>
                         @endif
 

@@ -1,14 +1,13 @@
-@extends('layout.app')
+@extends('layout.admin')
 
 @section('title', 'Agendamentos - Admin')
 
 @section('content')
-<div class="container py-5">
+<div class="admin-page">
     @php $barbeirosCount = \App\Models\Barbeiro::count(); @endphp
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="mb-0">Agendamentos</h1>
-            <p class="text-muted mb-0">CRUD completo de agendamentos.</p>
         </div>
         <a href="{{ route('admin.agendamentos.create') }}" class="btn btn-primary">Novo agendamento</a>
     </div>
@@ -42,8 +41,8 @@
                             <td>{{ $agendamento->barbeiro->nome }}</td>
                         @endif
                         <td>{{ $agendamento->servico->nome }}</td>
-                        <td>{{ $agendamento->data }}</td>
-                        <td>{{ $agendamento->hora }}</td>
+                        <td>@formatDate($agendamento->data)</td>
+                        <td>@formatTime($agendamento->hora)</td>
                         <td>{{ $agendamento->status }}</td>
                         <td>
                             <a href="{{ route('admin.agendamentos.show', $agendamento->id) }}" class="btn btn-sm btn-outline-secondary">Ver</a>

@@ -1,13 +1,12 @@
-@extends('layout.app')
+@extends('layout.admin')
 
 @section('title', 'Clientes - Admin')
 
 @section('content')
-<div class="container py-5">
+<div class="admin-page">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="mb-0">Clientes</h1>
-            <p class="text-muted mb-0">CRUD completo de clientes.</p>
         </div>
         <a href="{{ route('admin.clientes.create') }}" class="btn btn-primary">Novo cliente</a>
     </div>

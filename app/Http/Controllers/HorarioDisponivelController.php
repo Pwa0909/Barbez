@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barbeiro;
 use App\Models\HorarioDisponivel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class HorarioDisponivelController extends Controller
@@ -101,10 +102,26 @@ class HorarioDisponivelController extends Controller
 
     public function destroy($id)
     {
-        $horario = HorarioDisponivel::findOrFail($id);
-        $horario->delete();
+        $horario = HorarioDisponivel::with('agendamentos')->findOrFail($id);
 
-        return redirect()->route('admin.horarios.index')
-            ->with('success', 'Horário excluído com sucesso!');
+        try {
+            DB::beginTransaction();
+
+            if ($horario->agendamentos()->exists()) {
+                $horario->agendamentos()->delete();
+            }
+
+            $horario->delete();
+
+            DB::commit();
+
+            return redirect()->route('admin.horarios.index')
+                ->with('success', 'Horário excluído com sucesso!');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+
+            return redirect()->route('admin.horarios.index')
+                ->withErrors(['horario' => 'Não foi possível excluir este horário. Tente novamente.']);
+        }
     }
 }

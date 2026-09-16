@@ -1,9 +1,9 @@
-@extends('layout.app')
+@extends('layout.admin')
 
 @section('title', 'Detalhes do Serviço')
 
 @section('content')
-<div class="container py-5">
+<div class="admin-page">
     <h1 class="mb-4">Detalhes do Serviço</h1>
 
     <div class="card">

@@ -1,9 +1,9 @@
-@extends('layout.app')
+@extends('layout.admin')
 
 @section('title', 'Editar Barbeiro')
 
 @section('content')
-<div class="container py-5">
+<div class="admin-page">
     <h1 class="mb-4">Editar Barbeiro</h1>
 
     @if($errors->any())

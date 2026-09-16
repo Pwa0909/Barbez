@@ -9,7 +9,8 @@ use App\Http\Controllers\HorarioDisponivelController;
 use App\Http\Controllers\ServicoController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/login', 'auth.cliente-login')->name('login');
+Route::get('/login', [App\Http\Controllers\AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [App\Http\Controllers\AuthController::class, 'login'])->name('login.submit');
 Route::get('/welcome', [HomeController::class, 'index'])->name('welcome');
 
 Route::get('/servicos', [ServicoController::class, 'publicIndex'])->name('servicos');
@@ -21,13 +22,10 @@ Route::middleware('auth:cliente')->group(function () {
 
 Route::redirect('/agendar', '/agendamentos');
 Route::view('/sucesso', 'pages.agendamentos.sucesso')->name('agendamentos.sucesso');
-
-Route::get('/login/admin', [App\Http\Controllers\AuthController::class, 'showAdminLogin'])->name('admin.login');
-Route::post('/login/admin', [App\Http\Controllers\AuthController::class, 'loginAdmin'])->name('admin.login.submit');
+Route::redirect('/login/admin', '/login');
+Route::redirect('/login/cliente', '/login');
 Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 
-Route::get('/login/cliente', [App\Http\Controllers\ClienteAuthController::class, 'showLoginForm'])->name('cliente.login');
-Route::post('/login/cliente', [App\Http\Controllers\ClienteAuthController::class, 'login'])->name('cliente.login.submit');
 Route::get('/register/cliente', [App\Http\Controllers\ClienteAuthController::class, 'showRegisterForm'])->name('cliente.register');
 Route::post('/register/cliente', [App\Http\Controllers\ClienteAuthController::class, 'register'])->name('cliente.register.submit');
 Route::post('/logout/cliente', [App\Http\Controllers\ClienteAuthController::class, 'logout'])->name('cliente.logout');

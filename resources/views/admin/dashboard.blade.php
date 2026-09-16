@@ -1,9 +1,9 @@
-@extends('layout.app')
+@extends('layout.admin')
 
 @section('title', 'Painel Admin')
 
 @section('content')
-<div class="container py-5">
+<div class="admin-page">
     @php $barbeirosCount = \App\Models\Barbeiro::count(); @endphp
     <div class="dashboard-hero rounded-4 p-4 mb-4 overflow-hidden">
         <div class="row align-items-center gy-3">
@@ -63,7 +63,7 @@
                     @else
                         <p class="text-muted mb-1">{{ $next->cliente->nome }}</p>
                     @endif
-                    <p class="h4 mb-1">{{ date('d/m/Y', strtotime($next->data)) }} às {{ date('H:i', strtotime($next->hora)) }}</p>
+                    <p class="h4 mb-1">@formatDate($next->data) às @formatTime($next->hora)</p>
                     <span class="badge badge-status badge-status-{{ strtolower(str_replace(' ', '-', $next->status)) }}">{{ $next->status }}</span>
                 @else
                     <p class="text-muted mb-0">Nenhum agendamento disponível no momento.</p>
@@ -100,8 +100,8 @@
                                         <td>{{ $agendamento->barbeiro->nome }}</td>
                                     @endif
                                     <td>{{ $agendamento->servico->nome }}</td>
-                                    <td>{{ date('d/m/Y', strtotime($agendamento->data)) }}</td>
-                                    <td>{{ date('H:i', strtotime($agendamento->hora)) }}</td>
+                                    <td>@formatDate($agendamento->data)</td>
+                                    <td>@formatTime($agendamento->hora)</td>
                                     <td>
                                         <span class="badge badge-status badge-status-{{ strtolower(str_replace(' ', '-', $agendamento->status)) }}">{{ $agendamento->status }}</span>
                                     </td>

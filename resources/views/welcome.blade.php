@@ -656,15 +656,14 @@
         @if(auth()->guard('cliente')->check())
           <li><a href="{{ route('agendamentos') }}">Agendamentos</a></li>
         @else
-          <li><a href="{{ route('cliente.login') }}">Agendamentos</a></li>
+          <li><a href="{{ route('login') }}">Agendamentos</a></li>
         @endif
         <li><a href="{{ route('cliente.register') }}">Cadastrar</a></li>
-        <li><a href="{{ route('admin.login') }}">Admin</a></li>
       </ul>
       @if(auth()->guard('cliente')->check())
         <a href="{{ route('agendamentos') }}" class="nav-cta">Agendar</a>
       @else
-        <a href="{{ route('cliente.login') }}" class="nav-cta">Agendar</a>
+        <a href="{{ route('login') }}" class="nav-cta">Agendar</a>
       @endif
     </div>
   </nav>
@@ -682,7 +681,7 @@
           @if(auth()->guard('cliente')->check())
             <a href="{{ route('agendamentos') }}" class="btn-gold">Agendar Horário</a>
           @else
-            <a href="{{ route('cliente.login') }}" class="btn-gold">Agendar Horário</a>
+            <a href="{{ route('login') }}" class="btn-gold">Agendar Horário</a>
           @endif
           <a href="{{ route('servicos') }}" class="btn-outline">Ver Serviços</a>
         </div>

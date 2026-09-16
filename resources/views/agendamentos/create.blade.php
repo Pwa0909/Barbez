@@ -1,9 +1,9 @@
-@extends('layout.app')
+@extends('layout.admin')
 
 @section('title', 'Cadastrar Agendamento')
 
 @section('content')
-<div class="container py-5">
+<div class="admin-page">
     <h1 class="mb-4">Cadastrar Agendamento</h1>
 
     @if($errors->any())
@@ -46,7 +46,7 @@
                 <option value="">Selecione...</option>
                 @foreach($horarios as $horario)
                     <option value="{{ $horario->id }}" {{ old('horario_disponivel_id') == $horario->id ? 'selected' : '' }}>
-                        {{ $horario->barbeiro->nome }} — {{ $horario->data }} {{ $horario->hora }}
+                        {{ $horario->barbeiro->nome }} — @formatDate($horario->data) @formatTime($horario->hora)
                     </option>
                 @endforeach
             </select>

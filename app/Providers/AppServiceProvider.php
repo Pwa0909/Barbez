@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Blade::directive('formatDate', function ($expression) {
+            return "<?php echo \\Illuminate\\Support\\Carbon::parse({$expression})->format('d/m/Y'); ?>";
+        });
+
+        Blade::directive('formatTime', function ($expression) {
+            return "<?php echo \\Illuminate\\Support\\Carbon::parse({$expression})->format('H:i'); ?>";
+        });
     }
 }

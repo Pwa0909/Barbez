@@ -1,13 +1,12 @@
-@extends('layout.app')
+@extends('layout.admin')
 
 @section('title', 'Serviços - Admin')
 
 @section('content')
-<div class="container py-5">
+<div class="admin-page">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="mb-0">Serviços</h1>
-            <p class="text-muted mb-0">CRUD completo de serviços.</p>
         </div>
         <a href="{{ route('admin.servicos.create') }}" class="btn btn-primary">Novo serviço</a>
     </div>

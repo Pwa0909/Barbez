@@ -1,9 +1,9 @@
-@extends('layout.app')
+@extends('layout.admin')
 
 @section('title', 'Horários Disponíveis - Admin')
 
 @section('content')
-<div class="container py-5">
+<div class="admin-page">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="mb-0">Horários Disponíveis</h1>
@@ -46,8 +46,8 @@
                             @forelse($horarios as $horario)
                                 <tr data-data="{{ $horario->data }}">
                                     <td>{{ $horario->barbeiro->nome }}</td>
-                                    <td>{{ $horario->data }}</td>
-                                    <td>{{ $horario->hora }}</td>
+                                    <td>@formatDate($horario->data)</td>
+                                    <td>@formatTime($horario->hora)</td>
                                     <td>{{ $horario->disponivel ? 'Sim' : 'Não' }}</td>
                                     <td>
                                         <a href="{{ route('admin.horarios.show', $horario->id) }}" class="btn btn-sm btn-outline-secondary">Ver</a>

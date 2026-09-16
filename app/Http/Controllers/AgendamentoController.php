@@ -15,7 +15,7 @@ class AgendamentoController extends Controller
     public function publicCreate()
     {
         if (!auth('cliente')->check()) {
-            return redirect()->route('cliente.login');
+            return redirect()->route('login');
         }
 
         $cliente = auth('cliente')->user();
@@ -39,7 +39,7 @@ class AgendamentoController extends Controller
     {
         $cliente = auth('cliente')->user();
         if (!$cliente) {
-            return redirect()->route('cliente.login');
+            return redirect()->route('login');
         }
 
         $data = $request->validated();
