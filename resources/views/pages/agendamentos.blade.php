@@ -311,6 +311,10 @@
     #horario-datepicker .datepicker-dropdown:after {
         display: none;
     }
+
+    #horario-datepicker + .datepicker {
+        display: none !important;
+    }
 </style>
 
 <script>
@@ -320,17 +324,15 @@
         }
 
         var $picker = $('#horario-datepicker');
-        var $existingDatepickers = $('.datepicker').not($picker.find('.datepicker'));
-
-        if ($existingDatepickers.length) {
-            $existingDatepickers.each(function () {
-                var $dp = $(this);
+        $('.datepicker').each(function () {
+            var $dp = $(this);
+            if (!$dp.closest('#horario-datepicker').length && !$dp.is($picker)) {
                 if ($dp.data('datepicker')) {
                     $dp.datepicker('remove');
                 }
                 $dp.remove();
-            });
-        }
+            }
+        });
 
         if ($picker.data('datepicker')) {
             $picker.datepicker('remove');

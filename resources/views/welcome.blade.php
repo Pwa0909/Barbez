@@ -787,7 +787,7 @@
       <div class="pricing-grid">
         <div class="pricing-card">
           <div class="pricing-card-header">
-            <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=80" alt="Cortes">
+            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=900&q=80" alt="Corte de cabelo masculino">
             <div class="pricing-card-header-title"><h3>Corte de Cabelo</h3></div>
           </div>
           <div class="pricing-card-body">
@@ -807,7 +807,7 @@
         </div>
         <div class="pricing-card">
           <div class="pricing-card-header">
-            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="Combos">
+            <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=80" alt="Combo masculino de corte e barba">
             <div class="pricing-card-header-title"><h3>Combos</h3></div>
           </div>
           <div class="pricing-card-body">
