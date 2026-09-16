@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AgendamentoRequest;
 use App\Models\Agendamento;
+use App\Models\Barbeiro;
 use App\Models\Cliente;
 use App\Models\HorarioDisponivel;
 use App\Models\Servico;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -20,6 +22,7 @@ class AgendamentoController extends Controller
         }
 
         $cliente = auth('cliente')->user();
+        $this->ensureUpcomingSchedules();
         $servicos = Servico::all();
         $horarios = HorarioDisponivel::where('disponivel', true)
             ->orderBy('data')
@@ -34,6 +37,43 @@ class AgendamentoController extends Controller
             'servicos',
             'horarios'
         ));
+    }
+
+    private function ensureUpcomingSchedules(): void
+    {
+        if (HorarioDisponivel::where('disponivel', true)
+            ->whereDate('data', '>=', Carbon::today())
+            ->exists()) {
+            return;
+        }
+
+        $barbeiros = Barbeiro::where('ativo', true)->get();
+        $horarios = [];
+
+        for ($dia = 0; $dia <= 6; $dia++) {
+            $data = Carbon::today()->addDays($dia);
+
+            if ($data->isSunday()) {
+                continue;
+            }
+
+            foreach ($barbeiros as $barbeiro) {
+                for ($minutos = 7 * 60; $minutos <= 17 * 60; $minutos += 30) {
+                    $horarios[] = [
+                        'barbeiro_id' => $barbeiro->id,
+                        'data' => $data->toDateString(),
+                        'hora' => sprintf('%02d:%02d', intdiv($minutos, 60), $minutos % 60),
+                        'disponivel' => true,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                }
+            }
+        }
+
+        if ($horarios) {
+            DB::table('horarios_disponiveis')->insertOrIgnore($horarios);
+        }
     }
 
     public function publicStore(AgendamentoRequest $request)
