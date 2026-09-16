@@ -69,7 +69,7 @@
                     <div class="horario-options">
                         @forelse($horarios as $horario)
                             <label class="horario-card {{ old('horario_disponivel_id') == $horario->id ? 'selected' : '' }} d-none" data-date="{{ \Illuminate\Support\Carbon::parse($horario->data)->format('Y-m-d') }}">
-                                <input type="radio" name="horario_disponivel_id" value="{{ $horario->id }}" required hidden {{ old('horario_disponivel_id') == $horario->id ? 'checked' : '' }}>
+                                <input type="radio" name="horario_disponivel_id" value="{{ $horario->id }}" hidden {{ old('horario_disponivel_id') == $horario->id ? 'checked' : '' }}>
                                 <div class="horario-card-content">
                                     <div class="horario-card-top">
                                         <span class="horario-day">{{ \Illuminate\Support\Carbon::parse($horario->data)->format('d/m/Y') }}</span>
@@ -208,9 +208,12 @@
         });
 
         $('form[action="{{ route('agendamentos.store') }}"]').on('submit', function (event) {
-            if (!$('input[name="horario_disponivel_id"]:checked').length) {
+            var $form = $(this);
+            var $selectedHorario = $form.find('input[name="horario_disponivel_id"]:checked');
+
+            if (!$selectedHorario.length) {
                 event.preventDefault();
-                $('#horario-no-results').removeClass('d-none').text('Selecione um horário antes de confirmar o agendamento.');
+                $message.removeClass('d-none').text('Selecione um horário antes de confirmar o agendamento.');
                 $('#horario-times-screen').removeClass('d-none');
             }
         });
