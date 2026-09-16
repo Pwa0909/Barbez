@@ -9,6 +9,7 @@ use App\Models\HorarioDisponivel;
 use App\Models\Servico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AgendamentoController extends Controller
 {
@@ -52,16 +53,17 @@ class AgendamentoController extends Controller
         try {
             DB::beginTransaction();
 
-            $updated = HorarioDisponivel::where('id', $data['horario_disponivel_id'])
+            $horario = HorarioDisponivel::where('id', $data['horario_disponivel_id'])
                 ->where('disponivel', true)
-                ->update(['disponivel' => false]);
+                ->lockForUpdate()
+                ->first();
 
-            if (!$updated) {
+            if (!$horario) {
                 DB::rollBack();
                 return back()->withErrors(['horario_disponivel_id' => 'O horário selecionado já foi reservado. Por favor escolha outro.'])->withInput();
             }
 
-            $horario = HorarioDisponivel::findOrFail($data['horario_disponivel_id']);
+            $horario->update(['disponivel' => false]);
             $data['barbeiro_id'] = $horario->barbeiro_id;
             $data['data'] = $horario->data;
             $data['hora'] = $horario->hora;
@@ -71,8 +73,13 @@ class AgendamentoController extends Controller
             $agendamento = Agendamento::create($data);
 
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             DB::rollBack();
+            Log::error('Erro ao reservar horário no atendimento público.', [
+                'cliente_id' => $cliente->id,
+                'horario_disponivel_id' => $data['horario_disponivel_id'] ?? null,
+                'exception' => $e,
+            ]);
             return back()->withErrors(['error' => 'Erro ao reservar o horário. Tente novamente.'])->withInput();
         }
 
