@@ -16,4 +16,12 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_agendamento_calendar_disables_sundays(): void
+    {
+        $response = $this->get('/agendamentos');
+
+        $response->assertRedirect();
+        $this->assertStringEndsWith('/login', $response->headers->get('Location'));
+    }
 }

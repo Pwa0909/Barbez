@@ -122,16 +122,17 @@
 
 <style>
     .dashboard-hero {
-        background: radial-gradient(circle at top left, rgba(201,168,76,.16), transparent 35%), linear-gradient(135deg,#0b0b0b,#181818);
-        border: 1px solid rgba(255,255,255,.07);
+        background: radial-gradient(circle at top left, rgba(201,168,76,.18), transparent 32%), linear-gradient(135deg,#0b0b0b,#181818);
+        border: 1px solid rgba(255,255,255,.08);
+        box-shadow: 0 22px 48px rgba(0,0,0,.28);
     }
     .text-gold { color: #C9A84C; }
-    .btn-gold { background: #C9A84C; color: #090909 !important; border: 1px solid transparent; }
-    .btn-gold:hover { background: #e8c97a; }
-    .stat-card { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); }
+    .btn-gold { background: linear-gradient(135deg, #d7bb66, #c9a84c 45%, #b8922a); color: #090909 !important; border: 1px solid transparent; box-shadow: 0 12px 24px rgba(201,168,76,.18); }
+    .btn-gold:hover { background: linear-gradient(135deg, #ebcf7d, #d9b85e 45%, #c49e39); }
+    .stat-card { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.025)); border: 1px solid rgba(255,255,255,.08); box-shadow: 0 16px 32px rgba(0,0,0,.18); }
     .stat-label { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .18em; color: rgba(255,255,255,.7); margin-bottom: .75rem; }
     .stat-value { font-size: 2.25rem; margin: 0; color: #fff; }
-    .card-highlight { background: rgba(201,168,76,.08); border: 1px solid rgba(201,168,76,.24); }
+    .card-highlight { background: linear-gradient(180deg, rgba(201,168,76,.1), rgba(201,168,76,.04)); border: 1px solid rgba(201,168,76,.22); box-shadow: 0 16px 40px rgba(201,168,76,.08); }
     .badge-status { padding: .55em .8em; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; border-radius: 999px; }
     .badge-status-agendado { background: rgba(201,168,76,.15); color: #D8C08A; }
     .badge-status-concluído, .badge-status-concluido { background: rgba(40,167,69,.16); color: #A8D6A5; }

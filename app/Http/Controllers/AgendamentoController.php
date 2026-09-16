@@ -103,6 +103,11 @@ class AgendamentoController extends Controller
                 return back()->withErrors(['horario_disponivel_id' => 'O horário selecionado já foi reservado. Por favor escolha outro.'])->withInput();
             }
 
+            if (Carbon::parse($horario->data)->isSunday()) {
+                DB::rollBack();
+                return back()->withErrors(['horario_disponivel_id' => 'Não é permitido agendar aos domingos.'])->withInput();
+            }
+
             $horario->update(['disponivel' => false]);
             $data['barbeiro_id'] = $horario->barbeiro_id;
             $data['data'] = $horario->data;
@@ -159,6 +164,13 @@ class AgendamentoController extends Controller
         try {
             DB::beginTransaction();
 
+            $horario = HorarioDisponivel::findOrFail($data['horario_disponivel_id']);
+
+            if (Carbon::parse($horario->data)->isSunday()) {
+                DB::rollBack();
+                return back()->withErrors(['horario_disponivel_id' => 'Não é permitido agendar aos domingos.'])->withInput();
+            }
+
             $updated = HorarioDisponivel::where('id', $data['horario_disponivel_id'])
                 ->where('disponivel', true)
                 ->update(['disponivel' => false]);
@@ -167,8 +179,6 @@ class AgendamentoController extends Controller
                 DB::rollBack();
                 return back()->withErrors(['horario_disponivel_id' => 'Horário indisponível.'])->withInput();
             }
-
-            $horario = HorarioDisponivel::findOrFail($data['horario_disponivel_id']);
             $data['barbeiro_id'] = $horario->barbeiro_id;
             $data['data'] = $horario->data;
             $data['hora'] = $horario->hora;

@@ -12,21 +12,24 @@
     <style>
         :root {
             --admin-bg: #0b0b0b;
-            --admin-panel: #121212;
-            --admin-panel-alt: #171717;
+            --admin-panel: #131313;
+            --admin-panel-alt: #1a1a1a;
             --admin-text: #f8f3eb;
-            --admin-muted: rgba(248, 243, 235, 0.82);
+            --admin-muted: rgba(248, 243, 235, 0.78);
             --admin-gold: #c9a84c;
-            --admin-gold-soft: rgba(201, 168, 76, 0.18);
+            --admin-gold-soft: rgba(201, 168, 76, 0.16);
             --admin-border: rgba(255,255,255,0.1);
             --admin-success: #9ae6b4;
             --admin-danger: #f59ea2;
             --admin-heading: #ffffff;
+            --admin-panel-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
         }
 
         body {
             margin: 0;
-            background: linear-gradient(135deg, #070707 0%, #101010 100%);
+            background:
+                radial-gradient(circle at top left, rgba(201, 168, 76, 0.08), transparent 35%),
+                linear-gradient(135deg, #070707 0%, #101010 100%);
             color: var(--admin-text);
             font-family: 'DM Sans', sans-serif;
         }
@@ -83,10 +86,11 @@
         }
 
         .admin-sidebar {
-            width: 260px;
-            background: rgba(8, 8, 8, 0.96);
+            width: 280px;
+            background: linear-gradient(180deg, rgba(10,10,10,0.98), rgba(17,17,17,0.96));
             border-right: 1px solid var(--admin-border);
             padding: 2rem 1.25rem;
+            box-shadow: inset -1px 0 0 rgba(255,255,255,0.02);
         }
 
         .admin-brand {
@@ -99,14 +103,15 @@
         }
 
         .admin-brand-mark {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 0.75rem;
+            width: 2.7rem;
+            height: 2.7rem;
+            border-radius: 0.85rem;
             display: grid;
             place-items: center;
             background: linear-gradient(135deg, var(--admin-gold), #e5cd82);
             color: #141414;
-            font-weight: 700;
+            font-weight: 800;
+            box-shadow: 0 12px 28px rgba(201,168,76,0.28);
         }
 
         .admin-brand-name {
@@ -125,18 +130,21 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.8rem 0.9rem;
-            border-radius: 0.8rem;
+            padding: 0.9rem 0.95rem;
+            border-radius: 0.9rem;
             color: var(--admin-muted);
             text-decoration: none;
             transition: .2s ease;
+            border: 1px solid transparent;
+            font-weight: 600;
         }
 
         .admin-nav a:hover,
         .admin-nav a.active {
-            background: var(--admin-gold-soft);
-            border: 1px solid rgba(201, 168, 76, 0.2);
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.12), rgba(201, 168, 76, 0.22));
+            border: 1px solid rgba(201, 168, 76, 0.26);
             color: var(--admin-text);
+            box-shadow: inset 0 0 0 1px rgba(201,168,76,0.08);
         }
 
         .admin-main {
@@ -148,11 +156,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(18, 18, 18, 0.8);
+            background: linear-gradient(180deg, rgba(18,18,18,0.92), rgba(15,15,15,0.9));
             border: 1px solid var(--admin-border);
             border-radius: 1rem;
             padding: 1rem 1.25rem;
             margin-bottom: 2rem;
+            box-shadow: var(--admin-panel-shadow);
         }
 
         .admin-topbar-title {
@@ -170,10 +179,11 @@
         }
 
         .admin-page {
-            background: rgba(18, 18, 18, 0.72);
+            background: linear-gradient(180deg, rgba(18, 18, 18, 0.88), rgba(15,15,15,0.9));
             border: 1px solid var(--admin-border);
             border-radius: 1.25rem;
             padding: 2rem;
+            box-shadow: var(--admin-panel-shadow);
         }
 
         .page-head {

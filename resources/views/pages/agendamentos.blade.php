@@ -128,6 +128,107 @@
     .horario-time { font-size: 1.1rem; font-weight: 700; color: #fff; }
     .horario-note { font-size: .82rem; color: rgba(245,240,232,.6); }
     .horario-filter-message { color: rgba(245,240,232,.75); font-size: .9rem; }
+
+    #horario-datepicker .datepicker {
+        width: 100%;
+        max-width: 100%;
+        background: rgba(12, 12, 12, 0.96);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        border-radius: 1.2rem;
+        padding: 1rem;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+    }
+
+    #horario-datepicker .datepicker table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0.35rem;
+        margin: 0;
+    }
+
+    #horario-datepicker .datepicker .datepicker-switch,
+    #horario-datepicker .datepicker .prev,
+    #horario-datepicker .datepicker .next,
+    #horario-datepicker .datepicker tfoot tr th {
+        color: #f0d58d;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: transparent;
+    }
+
+    #horario-datepicker .datepicker .datepicker-switch:hover,
+    #horario-datepicker .datepicker .prev:hover,
+    #horario-datepicker .datepicker .next:hover,
+    #horario-datepicker .datepicker tfoot tr th:hover {
+        background: rgba(201, 168, 76, 0.12);
+        color: #fff4d1;
+    }
+
+    #horario-datepicker .datepicker th,
+    #horario-datepicker .datepicker td {
+        border: none;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 0.75rem;
+        font-weight: 600;
+    }
+
+    #horario-datepicker .datepicker thead th {
+        color: rgba(255,255,255,0.72);
+        font-size: 0.72rem;
+        padding: 0.4rem 0;
+    }
+
+    #horario-datepicker .datepicker td.day {
+        background: rgba(255,255,255,0.02);
+        color: #f5f0e8;
+        transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    #horario-datepicker .datepicker td.day:hover,
+    #horario-datepicker .datepicker td.day.focused {
+        background: rgba(201, 168, 76, 0.12);
+        color: #fff;
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px rgba(201, 168, 76, 0.08);
+    }
+
+    #horario-datepicker .datepicker td.old,
+    #horario-datepicker .datepicker td.new {
+        color: rgba(245,240,232,0.35);
+    }
+
+    #horario-datepicker .datepicker td.disabled,
+    #horario-datepicker .datepicker td.disabled:hover {
+        background: rgba(255,255,255,0.02);
+        color: rgba(255,255,255,0.2);
+        cursor: not-allowed;
+    }
+
+    #horario-datepicker .datepicker td.active,
+    #horario-datepicker .datepicker td.active:hover {
+        background: linear-gradient(135deg, #d7bb66, #c9a84c 45%, #b8922a);
+        color: #101010;
+        box-shadow: 0 12px 26px rgba(201, 168, 76, 0.22);
+        text-shadow: none;
+    }
+
+    #horario-datepicker .datepicker td.today,
+    #horario-datepicker .datepicker td.today:hover {
+        background: rgba(201, 168, 76, 0.14);
+        border: 1px solid rgba(201, 168, 76, 0.4);
+        color: #f0d58d;
+    }
+
+    #horario-datepicker .datepicker td.range {
+        background: rgba(201, 168, 76, 0.08);
+    }
+
+    #horario-datepicker .datepicker-dropdown:before,
+    #horario-datepicker .datepicker-dropdown:after {
+        display: none;
+    }
 </style>
 
 <script>
@@ -137,22 +238,24 @@
         }
 
         window.__barberzDatepickers = window.__barberzDatepickers || {};
+
+        var $picker = $('#horario-datepicker');
+        if ($picker.data('datepicker')) {
+            $picker.datepicker('remove');
+        }
+
         if (window.__barberzDatepickers['horario-datepicker']) {
             return;
         }
-
         window.__barberzDatepickers['horario-datepicker'] = true;
 
         var selectedDate = null;
         var $cards = $('.horario-card');
         var $message = $('#horario-no-results');
-        var $picker = $('#horario-datepicker');
 
         $picker.off('changeDate.barberzDatepicker');
-
-        if ($picker.data('datepicker')) {
-            return;
-        }
+        $('#horario-back-button').off('click.barberzDatepicker');
+        $cards.off('click.barberzDatepicker');
 
         $.fn.datepicker.dates['pt-BR'] = {
             days: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'],
@@ -171,7 +274,8 @@
             language: 'pt-BR',
             todayHighlight: true,
             autoclose: true,
-            startDate: new Date()
+            startDate: new Date(),
+            daysOfWeekDisabled: [0]
         }).on('changeDate.barberzDatepicker', function (e) {
             selectedDate = e.format('yyyy-mm-dd');
             var visibleCount = 0;
@@ -194,20 +298,20 @@
             $message.toggle(visibleCount === 0);
         });
 
-        $('#horario-back-button').on('click', function () {
+        $('#horario-back-button').on('click.barberzDatepicker', function () {
             $('#horario-times-screen').addClass('d-none');
             $('#horario-calendar-screen').removeClass('d-none');
             $cards.addClass('d-none');
             $('#horario-no-results').addClass('d-none');
         });
 
-        $cards.on('click', function () {
+        $cards.on('click.barberzDatepicker', function () {
             $(this).find('input').prop('checked', true);
             $cards.removeClass('selected');
             $(this).addClass('selected');
         });
 
-        $('form[action="{{ route('agendamentos.store') }}"]').on('submit', function (event) {
+        $('form[action="{{ route('agendamentos.store') }}"]').off('submit.barberzDatepicker').on('submit.barberzDatepicker', function (event) {
             var $form = $(this);
             var $selectedHorario = $form.find('input[name="horario_disponivel_id"]:checked');
 

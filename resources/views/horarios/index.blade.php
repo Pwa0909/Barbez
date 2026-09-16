@@ -98,7 +98,8 @@
             format: 'yyyy-mm-dd',
             todayHighlight: true,
             autoclose: true,
-            inline: true
+            inline: true,
+            daysOfWeekDisabled: [0]
         }).on('changeDate.barberzDatepicker', function (e) {
             var selected = e.format('yyyy-mm-dd');
             $('#selected-date').text(selected);

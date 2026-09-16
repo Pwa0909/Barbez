@@ -20,6 +20,23 @@
         @csrf
         @method('PUT')
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const input = document.querySelector('input[name="data"]');
+                if (!input) return;
+
+                input.addEventListener('change', function () {
+                    const date = new Date(this.value + 'T00:00:00');
+                    if (!isNaN(date.getTime()) && date.getDay() === 0) {
+                        this.setCustomValidity('Não é permitido cadastrar horários aos domingos.');
+                        this.reportValidity();
+                    } else {
+                        this.setCustomValidity('');
+                    }
+                });
+            });
+        </script>
+
         <div class="mb-3">
             <label class="form-label">Barbeiro</label>
             <select name="barbeiro_id" class="form-select" required>
