@@ -237,21 +237,6 @@ jQuery(document).ready(function($) {
 	};
 	// siteCountDown();
 
-	var siteDatePicker = function() {
-
-		var $datepickers = $('.datepicker').not('#horario-datepicker');
-
-		if ( $datepickers.length > 0 ) {
-			$datepickers.each(function () {
-				if (!$(this).data('datepicker')) {
-					$(this).datepicker();
-				}
-			});
-		}
-
-	};
-	siteDatePicker();
-
 	var siteSticky = function() {
 		$(".js-sticky-header").sticky({topSpacing:0});
 	};

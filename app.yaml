@@ -7,6 +7,7 @@ env:
   PHPIX_PHP_THREADS: '4'
   CACHE_STORE: file
   SESSION_DRIVER: cookie
+  DB_CONNECTION: mysql
 capabilities:
   database:
     engine: mysql
@@ -15,7 +16,7 @@ jobs:
   trigger: post-deployment
   action:
     execute:
-      command: after_deploy
+      command: php artisan migrate --force && php artisan db:seed --class=HorarioDisponivelSeeder --force
 annotations:
   anybuild.run/config:
     composer_build_script: post-update-cmd

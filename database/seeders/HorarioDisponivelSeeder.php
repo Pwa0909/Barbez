@@ -37,7 +37,7 @@ class HorarioDisponivelSeeder extends Seeder
             }
         }
 
-        DB::table('horarios_disponiveis')->insert($horarios);
+        DB::table('horarios_disponiveis')->insertOrIgnore($horarios);
 
         $this->command->info('✅ Horários disponíveis criados: ' . count($horarios));
     }
