@@ -240,6 +240,7 @@
         window.__barberzDatepickers = window.__barberzDatepickers || {};
 
         var $picker = $('#horario-datepicker');
+        $('.datepicker').not($picker.find('.datepicker')).remove();
         if ($picker.data('datepicker')) {
             $picker.datepicker('remove');
         }
@@ -275,7 +276,8 @@
             todayHighlight: true,
             autoclose: true,
             startDate: new Date(),
-            daysOfWeekDisabled: [0]
+            daysOfWeekDisabled: [0],
+            numberOfMonths: 1
         }).on('changeDate.barberzDatepicker', function (e) {
             selectedDate = e.format('yyyy-mm-dd');
             var visibleCount = 0;
