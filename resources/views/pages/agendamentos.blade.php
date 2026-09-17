@@ -52,6 +52,7 @@
                 <div id="horario-calendar-screen" class="mb-4">
                     <label class="form-label-gold">Selecione o dia</label>
                     <div class="calendar-box rounded-4 p-3 bg-black border border-white-10 mb-3">
+                        <div id="horario-datepicker"></div>
                     </div>
                     <p class="text-muted small mb-2">Não é possível escolher dias ou meses anteriores. Após selecionar o dia, você será direcionado para os horários disponíveis.</p>
                 </div>
@@ -324,26 +325,34 @@
 
         var $picker = $('#horario-datepicker');
 
+        if (window.__barberzDatepickerInitialized === 'horario-datepicker') {
+            if ($picker.data('datepicker')) {
+                $picker.datepicker('remove');
+            }
+            $picker.find('.datepicker').remove();
+            $picker.next('.datepicker').remove();
+            return;
+        }
+
         $('.datepicker').each(function () {
             var $dp = $(this);
-            if (!$dp.is($picker) && !$dp.closest('#horario-datepicker').length) {
-                if ($dp.data('datepicker')) {
-                    $dp.datepicker('remove');
-                }
-                $dp.remove();
+            if ($dp.is($picker) || $dp.closest('#horario-datepicker').length) {
+                return;
             }
+            if ($dp.data('datepicker')) {
+                $dp.datepicker('remove');
+            }
+            $dp.remove();
         });
 
         $picker.find('.datepicker').remove();
-
-        if ($picker.attr('data-barberz-initialized') === 'true') {
-            return;
-        }
-        $picker.attr('data-barberz-initialized', 'true');
+        $picker.next('.datepicker').remove();
 
         if ($picker.data('datepicker')) {
             $picker.datepicker('remove');
         }
+
+        window.__barberzDatepickerInitialized = 'horario-datepicker';
 
         var selectedDate = null;
         var $cards = $('.horario-card');
