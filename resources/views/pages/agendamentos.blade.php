@@ -274,6 +274,7 @@
     #horario-datepicker .datepicker td.old,
     #horario-datepicker .datepicker td.new {
         color: rgba(245,240,232,0.35);
+        display: none !important;
     }
 
     #horario-datepicker .datepicker td.disabled,
@@ -369,14 +370,21 @@
             weekStart: 0
         };
 
+        var hoje = new Date();
+        var primeiroDiaDoMes = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
+        var ultimoDiaDoMes = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0);
+
         $picker.datepicker({
             format: 'yyyy-mm-dd',
             language: 'pt-BR',
             todayHighlight: true,
             autoclose: true,
-            startDate: new Date(),
+            startDate: primeiroDiaDoMes,
+            endDate: ultimoDiaDoMes,
             daysOfWeekDisabled: [0],
-            numberOfMonths: 1
+            numberOfMonths: 1,
+            calendarWeeks: false,
+            orientation: 'bottom'
         }).on('changeDate.barberzDatepicker', function (e) {
             selectedDate = e.format('yyyy-mm-dd');
             var visibleCount = 0;
