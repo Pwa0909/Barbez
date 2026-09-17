@@ -39,12 +39,14 @@ class ClienteAuthController extends Controller
     {
         $data = $request->validate([
             'nome' => ['required', 'string', 'max:255'],
+            'telefone' => ['nullable', 'string', 'max:20'],
             'email' => ['required', 'email', 'max:255', 'unique:clientes,email'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
 
         $cliente = \App\Models\Cliente::create([
             'nome' => $data['nome'],
+            'telefone' => $data['telefone'] ?? null,
             'email' => $data['email'],
             'senha' => Hash::make($data['password']),
         ]);

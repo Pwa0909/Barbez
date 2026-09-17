@@ -907,7 +907,7 @@
           </ul>
         </div>
         <div>
-          <div class="footer-heading">Newsletter</div>
+          <div class="footer-heading">Receba novidades</div>
           <div class="footer-newsletter">
             <input type="email" placeholder="seu@email.com">
             <button>Enviar</button>

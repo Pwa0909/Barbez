@@ -36,8 +36,7 @@ class AgendamentoRequest extends FormRequest
             'nome' => 'nullable|string|max:255',
             'servico_id' => 'required|exists:servicos,id',
             'horario_disponivel_id' => 'required|exists:horarios_disponiveis,id',
-            'status' => 'nullable|string|max:50',
-            'observacoes' => 'nullable|string'
+            'status' => 'nullable|string|max:50'
         ];
     }
 }

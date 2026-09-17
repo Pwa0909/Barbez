@@ -17,7 +17,6 @@
             <p><strong>Data no agendamento:</strong> @formatDate($agendamento->data)</p>
             <p><strong>Hora no agendamento:</strong> @formatTime($agendamento->hora)</p>
             <p><strong>Status:</strong> {{ $agendamento->status }}</p>
-            <p><strong>Observações:</strong> {{ $agendamento->observacoes ?? 'Nenhuma' }}</p>
         </div>
     </div>
 

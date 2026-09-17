@@ -57,11 +57,6 @@
             <input type="text" name="status" class="form-control" value="{{ old('status', 'Agendado') }}" required>
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Observações</label>
-            <textarea name="observacoes" class="form-control">{{ old('observacoes') }}</textarea>
-        </div>
-
         <div class="mt-4">
             <button type="submit" class="btn btn-success">Salvar</button>
             <a href="{{ route('admin.agendamentos.index') }}" class="btn btn-secondary">Voltar</a>

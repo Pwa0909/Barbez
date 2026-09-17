@@ -36,7 +36,7 @@
 
                 <div class="mb-4">
                     <label class="form-label-gold">Nome completo</label>
-                    <input type="text" name="nome" class="input-gold form-control" value="{{ old('nome') }}" placeholder="Digite seu nome completo" required>
+                    <input type="text" name="nome" class="input-gold form-control" value="{{ old('nome', auth('cliente')->user()->nome ?? '') }}" placeholder="Digite seu nome completo" readonly required>
                 </div>
 
                 <div class="mb-4">
@@ -83,11 +83,6 @@
                         @endforelse
                     </div>
                     <div class="alert alert-warning mt-3 d-none" id="horario-no-results">Nenhum horário disponível para o dia selecionado.</div>
-                </div>
-
-                <div class="mb-4">
-                    <label class="form-label-gold">Observações</label>
-                    <textarea name="observacoes" class="input-gold form-control" rows="4" placeholder="Adicione detalhes opcionais">{{ old('observacoes') }}</textarea>
                 </div>
 
                 <div class="mb-4" style="height:1px; background:rgba(201,168,76,.12);"></div>

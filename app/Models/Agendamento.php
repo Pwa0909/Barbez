@@ -13,8 +13,7 @@ class Agendamento extends Model
         'horario_disponivel_id',
         'data',
         'hora',
-        'status',
-        'observacoes'
+        'status'
     ];
 
     public function cliente()

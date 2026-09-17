@@ -35,6 +35,11 @@
                     </div>
 
                     <div class="mb-4">
+                        <label class="form-label-gold">Telefone</label>
+                        <input type="text" name="telefone" class="input-gold form-control" value="{{ old('telefone') }}" placeholder="(11) 99999-9999">
+                    </div>
+
+                    <div class="mb-4">
                         <label class="form-label-gold">E-mail</label>
                         <input type="email" name="email" class="input-gold form-control" value="{{ old('email') }}" required>
                     </div>

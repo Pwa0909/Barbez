@@ -62,11 +62,6 @@
             <input type="text" name="status" class="form-control" value="{{ old('status', $agendamento->status) }}" required>
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Observações</label>
-            <textarea name="observacoes" class="form-control">{{ old('observacoes', $agendamento->observacoes) }}</textarea>
-        </div>
-
         <div class="mt-4">
             <button type="submit" class="btn btn-success">Atualizar</button>
             <a href="{{ route('admin.agendamentos.index') }}" class="btn btn-secondary">Voltar</a>
