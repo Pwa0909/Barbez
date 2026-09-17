@@ -239,6 +239,59 @@
             color: var(--admin-text);
         }
 
+        .btn-secondary,
+        .btn-outline-secondary,
+        .btn-outline-primary,
+        .btn-outline-danger,
+        .btn-success,
+        .btn-danger {
+            border-radius: 0.75rem;
+            font-weight: 600;
+        }
+
+        .btn-secondary,
+        .btn-outline-secondary,
+        .btn-outline-primary,
+        .btn-outline-danger {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.12);
+            color: var(--admin-text);
+        }
+
+        .btn-secondary:hover,
+        .btn-outline-secondary:hover,
+        .btn-outline-primary:hover,
+        .btn-outline-danger:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.18);
+            color: var(--admin-text);
+        }
+
+        .btn-success {
+            background: #2fbf71;
+            border-color: #2fbf71;
+            color: #111111;
+        }
+
+        .btn-success:hover,
+        .btn-success:focus {
+            background: #45d381;
+            border-color: #45d381;
+            color: #111111;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            border-color: #ef4444;
+            color: #ffffff;
+        }
+
+        .btn-danger:hover {
+            background: #f55f5f;
+            border-color: #f55f5f;
+            color: #ffffff;
+        }
+
         .card-admin {
             background: rgba(255,255,255,0.02);
             border: 1px solid var(--admin-border);
@@ -341,15 +394,35 @@
         .form-control,
         .form-select,
         .form-control:focus,
-        .form-select:focus {
-            background: rgba(255,255,255,0.02);
-            border-color: rgba(255,255,255,0.08);
+        .form-select:focus,
+        textarea.form-control,
+        select.form-select {
+            background: rgba(15,15,15,0.9);
+            border: 1px solid rgba(255,255,255,0.12);
             color: var(--admin-text);
             box-shadow: none;
+            border-radius: 0.8rem;
         }
 
         .form-control::placeholder {
-            color: rgba(245,240,232,0.4);
+            color: rgba(245,240,232,0.45);
+        }
+
+        .form-control option,
+        .form-select option,
+        select option {
+            background: #121212;
+            color: var(--admin-text);
+        }
+
+        .form-check-input {
+            background-color: rgba(255,255,255,0.02);
+            border-color: rgba(255,255,255,0.18);
+            accent-color: var(--admin-gold);
+        }
+
+        .form-check-label {
+            color: var(--admin-text);
         }
 
         .alert {
