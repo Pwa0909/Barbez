@@ -18,21 +18,21 @@
 
     <div class="row gy-4">
         <div class="col-lg-4">
-            <div class="card shadow-sm border-0 p-3 mb-4">
-                <h2 class="h5">Calendário</h2>
-                <p class="text-muted">Use o calendário para filtrar os horários por data.</p>
-                <div id="horario-calendar"></div>
-                <div class="mt-3">
-                    <strong>Data selecionada:</strong> <span id="selected-date">Todas</span>
+            <div class="card shadow-sm border-0 p-3 mb-4" style="background: rgba(17,17,17,0.92); border: 1px solid rgba(255,255,255,0.08);">
+                <h2 class="h5 text-white mb-2">Calendário</h2>
+                <p class="text-muted mb-3">Use o calendário para filtrar os horários por data.</p>
+                <div id="horario-calendar" style="min-height: 280px;"></div>
+                <div class="mt-3 pt-3 border-top border-white-10">
+                    <strong class="text-white">Data selecionada:</strong> <span id="selected-date" class="text-light">Todas</span>
                 </div>
             </div>
         </div>
 
         <div class="col-lg-8">
-            <div class="card shadow-sm border-0 p-3">
-                <h2 class="h5">Horários disponíveis</h2>
+            <div class="card shadow-sm border-0 p-3" style="background: rgba(17,17,17,0.92); border: 1px solid rgba(255,255,255,0.08);">
+                <h2 class="h5 text-white mb-3">Horários disponíveis</h2>
                 <div class="table-responsive mt-3">
-                    <table class="table table-bordered table-hover align-middle" id="horarios-table">
+                    <table class="table table-bordered table-hover align-middle" id="horarios-table" style="background: transparent; color: #f7f3eb;">
                         <thead class="table-light">
                             <tr>
                                 <th>Barbeiro</th>
@@ -73,6 +73,52 @@
     </div>
 </div>
 
+<style>
+    #horario-calendar .datepicker {
+        width: 100%;
+        background: rgba(12,12,12,0.96);
+        border: 1px solid rgba(201, 168, 76, 0.25);
+        border-radius: 1rem;
+        color: #f8f3eb;
+        box-shadow: 0 22px 50px rgba(0,0,0,0.22);
+    }
+
+    #horario-calendar .datepicker table {
+        width: 100%;
+        margin: 0;
+        border-collapse: separate;
+        border-spacing: 0.25rem;
+    }
+
+    #horario-calendar .datepicker td,
+    #horario-calendar .datepicker th {
+        color: #f8f3eb;
+        border: none;
+        border-radius: .65rem;
+    }
+
+    #horario-calendar .datepicker td.active,
+    #horario-calendar .datepicker td.active:hover {
+        background: linear-gradient(135deg, #d7bb66, #c9a84c 45%, #b8922a);
+        color: #111111;
+    }
+
+    #horario-calendar .datepicker td.day:hover,
+    #horario-calendar .datepicker td.day.focused {
+        background: rgba(201, 168, 76, 0.15);
+        color: #fff;
+    }
+
+    #horario-calendar .datepicker .datepicker-switch,
+    #horario-calendar .datepicker .prev,
+    #horario-calendar .datepicker .next,
+    #horario-calendar .datepicker tfoot th {
+        color: #f0d58d;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+</style>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         if (typeof $ === 'undefined' || !$('#horario-calendar').datepicker) {
@@ -87,6 +133,26 @@
         window.__barberzDatepickers['horario-calendar'] = true;
 
         var $calendar = $('#horario-calendar');
+        var $tableRows = $('#horarios-table tbody tr[data-data]');
+        var $noResults = $('#no-results');
+
+        function updateTable(selectedDate) {
+            var label = selectedDate ? selectedDate : 'Todas';
+            $('#selected-date').text(label);
+
+            var visibleCount = 0;
+
+            $tableRows.each(function () {
+                var rowDate = $(this).data('data');
+                var show = !selectedDate || rowDate === selectedDate;
+                $(this).toggle(show);
+                if (show) {
+                    visibleCount++;
+                }
+            });
+
+            $noResults.toggle(visibleCount === 0);
+        }
 
         $calendar.off('changeDate.barberzDatepicker');
 
@@ -99,23 +165,14 @@
             todayHighlight: true,
             autoclose: true,
             inline: true,
+            startDate: new Date(),
             daysOfWeekDisabled: [0]
         }).on('changeDate.barberzDatepicker', function (e) {
-            var selected = e.format('yyyy-mm-dd');
-            $('#selected-date').text(selected);
-            var visibleCount = 0;
-
-            $('#horarios-table tbody tr[data-data]').each(function () {
-                var rowDate = $(this).data('data');
-                var show = selected === '' || rowDate === selected;
-                $(this).toggle(show);
-                if (show) {
-                    visibleCount++;
-                }
-            });
-
-            $('#no-results').toggle(visibleCount === 0);
+            var selected = e ? e.format('yyyy-mm-dd') : '';
+            updateTable(selected);
         });
+
+        updateTable('');
     });
 </script>
 @endsection

@@ -7,6 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon-scissors.svg') }}">
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <style>
@@ -245,6 +246,34 @@
             overflow: hidden;
         }
 
+        .card,
+        .card-admin,
+        .table-responsive,
+        .table,
+        .alert,
+        .admin-page {
+            background: rgba(18, 18, 18, 0.9);
+            color: var(--admin-text);
+        }
+
+        .table {
+            --bs-table-bg: transparent;
+            --bs-table-striped-bg: rgba(255,255,255,0.02);
+            --bs-table-hover-bg: rgba(201,168,76,0.06);
+            --bs-table-color: var(--admin-text);
+            --bs-table-bg-state: transparent;
+            --bs-table-border-color: rgba(255,255,255,0.08);
+            color: var(--admin-text);
+        }
+
+        .table thead th,
+        .table tbody td,
+        .table tbody th {
+            color: var(--admin-text) !important;
+            border-color: rgba(255,255,255,0.08);
+            background: transparent;
+        }
+
         .data-table thead th {
             background: rgba(255,255,255,0.03);
             color: var(--admin-text);
@@ -308,6 +337,20 @@
 
         .alert {
             border-radius: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--admin-gold);
+            border-color: var(--admin-gold);
+            color: #111111;
+            font-weight: 700;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background: #e8c97a;
+            border-color: #e8c97a;
+            color: #111111;
         }
 
         @media (max-width: 991px) {
@@ -384,5 +427,9 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
 </body>
 </html>
