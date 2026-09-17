@@ -248,6 +248,32 @@ body {
 .card.bg-white .text-light {
   color: var(--on-light-text) !important; }
 
+.bg-light, .bg-white, .section-light, .section-white,
+.card, .testimonial-card, .pricing-item, .pricing-card,
+.site-footer, .footer-newsletter, .footer-grid > div,
+.section-testimonials .testimonial-card,
+.section-pricing .pricing-item,
+.section-about .about-card,
+.site-wrap,
+main,
+section,
+.container,
+.row > *,
+.col-,
+.col,
+.col-md-*,
+.col-lg-*,
+.col-sm-* {
+  background-color: #111111 !important;
+  color: var(--on-dark-text) !important;
+}
+
+.card-body,
+.card .card-body,
+.card-body * {
+  color: var(--on-dark-text) !important;
+}
+
 p, li, span, label, td, th, div, a {
   color: inherit; }
 
