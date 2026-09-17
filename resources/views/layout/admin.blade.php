@@ -396,15 +396,24 @@
         .form-control:focus,
         .form-select:focus,
         textarea.form-control,
-        select.form-select {
-            background: rgba(15,15,15,0.9);
+        select.form-select,
+        input[type="date"],
+        input[type="time"],
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="search"] {
+            background: rgba(15,15,15,0.96);
             border: 1px solid rgba(255,255,255,0.12);
             color: var(--admin-text);
             box-shadow: none;
             border-radius: 0.8rem;
+            color-scheme: dark;
         }
 
-        .form-control::placeholder {
+        .form-control::placeholder,
+        input::placeholder {
             color: rgba(245,240,232,0.45);
         }
 
@@ -413,6 +422,13 @@
         select option {
             background: #121212;
             color: var(--admin-text);
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator,
+        input[type="time"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            opacity: 0.9;
+            cursor: pointer;
         }
 
         .form-check-input {
