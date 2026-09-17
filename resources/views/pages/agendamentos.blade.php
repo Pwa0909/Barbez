@@ -52,7 +52,6 @@
                 <div id="horario-calendar-screen" class="mb-4">
                     <label class="form-label-gold">Selecione o dia</label>
                     <div class="calendar-box rounded-4 p-3 bg-black border border-white-10 mb-3">
-                        <div id="horario-datepicker"></div>
                     </div>
                     <p class="text-muted small mb-2">Não é possível escolher dias ou meses anteriores. Após selecionar o dia, você será direcionado para os horários disponíveis.</p>
                 </div>
