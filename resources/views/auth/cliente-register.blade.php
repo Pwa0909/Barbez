@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Cadastro Cliente')
+@section('title', 'Cadastro de cliente')
 
 @section('content')
 <div class="position-relative text-center py-5 mb-5" style="background: linear-gradient(135deg,rgba(10,10,10,.92) 40%,rgba(10,10,10,.7)),url('https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;border-bottom: 1px solid rgba(201,168,76,.15);">

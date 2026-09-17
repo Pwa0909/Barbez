@@ -38,8 +38,8 @@
                                 </form>
                             </li>
                         @else
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('cliente.register') }}">Cadastrar</a></li>
+                            <li><a href="{{ route('login') }}">Entrar</a></li>
+                            <li><a href="{{ route('cliente.register') }}">Cadastre-se</a></li>
                         @endif
 
                     </ul>

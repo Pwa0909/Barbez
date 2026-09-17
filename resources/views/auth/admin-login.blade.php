@@ -1,12 +1,12 @@
 @extends('layout.app')
 
-@section('title', 'Login Admin')
+@section('title', 'Login do administrador')
 
 @section('content')
 <div class="position-relative text-center py-5 mb-5" style="background: linear-gradient(135deg,rgba(10,10,10,.92) 40%,rgba(10,10,10,.7)),url('https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;border-bottom: 1px solid rgba(201,168,76,.15);">
     <div class="container py-4">
         <div class="section-label justify-content-center mb-3">BarberPoint</div>
-        <h1 class="font-serif fw-bold text-white mb-3" style="font-size:clamp(2.2rem,5vw,3.5rem);">Login Admin</h1>
+        <h1 class="font-serif fw-bold text-white mb-3" style="font-size:clamp(2.2rem,5vw,3.5rem);">Login do administrador</h1>
         <p class="fw-light mx-auto mb-0" style="color:rgba(245,240,232,.55); max-width:440px;">Acesse o painel administrativo para controlar horários, clientes e serviços.</p>
         <div class="divider-gold mt-3"></div>
     </div>

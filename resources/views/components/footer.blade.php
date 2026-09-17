@@ -5,7 +5,7 @@
 
             <!-- Sobre -->
             <div class="col-md-4">
-                <h5 class="mb-3">Barbearia</h5>
+                <h5 class="mb-3">Sobre a barbearia</h5>
                
             </div>
 
@@ -13,7 +13,7 @@
             <div class="col-md-4">
                 <h5 class="mb-3">Links rápidos</h5>
                 <ul class="list-unstyled">
-                    <li><a href="{{ route('welcome') }}" class="text-white">Home</a></li>
+                    <li><a href="{{ route('welcome') }}" class="text-white">Início</a></li>
                     <li><a href="{{ route('servicos') }}" class="text-white">Serviços</a></li>
                     <li><a href="{{ route('agendamentos') }}" class="text-white">Agendar</a></li>
                 </ul>
@@ -22,7 +22,7 @@
             <!-- Contato -->
             <div class="col-md-4">
                 <h5 class="mb-3">Contato</h5>
-                <p>Email: contato@barbearia.com</p>
+                <p>E-mail: contato@barbearia.com</p>
                 <p>Telefone: (37) 99999-9999</p>
             </div>
 
