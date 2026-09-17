@@ -204,11 +204,52 @@ html {
     color: #fff;
     background: #dc3545; }
 
+:root {
+  --on-dark-text: #f5f0e8;
+  --on-light-text: #101010;
+  --soft-on-dark: rgba(245, 240, 232, 0.72);
+}
+
 body {
   line-height: 1.7;
-  color: #364d59 !important;
+  color: var(--on-light-text) !important;
   font-weight: 300;
   font-size: 1rem; }
+
+.bg-dark, .bg-black, .site-footer, .site-header, .servico-card, .admin-page, .card, .panel, .section-dark,
+.bg-dark * {
+  color: var(--on-dark-text) !important; }
+
+.bg-light, .bg-white, .card.bg-light, .card.bg-white, .section-light,
+.bg-light *, .bg-white *, .card.bg-light *, .card.bg-white * {
+  color: var(--on-light-text) !important; }
+
+.bg-dark .text-white,
+.bg-black .text-white,
+.site-footer .text-white,
+.servico-card .text-white,
+.admin-page .text-white,
+.card .text-white,
+.bg-dark .text-light,
+.bg-black .text-light,
+.site-footer .text-light,
+.servico-card .text-light,
+.admin-page .text-light,
+.card .text-light {
+  color: var(--on-dark-text) !important; }
+
+.bg-light .text-white,
+.bg-white .text-white,
+.card.bg-light .text-white,
+.card.bg-white .text-white,
+.bg-light .text-light,
+.bg-white .text-light,
+.card.bg-light .text-light,
+.card.bg-white .text-light {
+  color: var(--on-light-text) !important; }
+
+p, li, span, label, td, th, div, a {
+  color: inherit; }
 
 ::-moz-selection {
   background: #000;
