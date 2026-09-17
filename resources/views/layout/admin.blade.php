@@ -404,17 +404,21 @@
         input[type="password"],
         input[type="number"],
         input[type="search"] {
-            background: rgba(15,15,15,0.96);
-            border: 1px solid rgba(255,255,255,0.12);
-            color: var(--admin-text);
-            box-shadow: none;
-            border-radius: 0.8rem;
+            background: #171717 !important;
+            border: 1px solid rgba(255,255,255,0.14) !important;
+            color: var(--admin-text) !important;
+            box-shadow: none !important;
+            border-radius: 0.8rem !important;
             color-scheme: dark;
+            -webkit-text-fill-color: var(--admin-text) !important;
+            appearance: none;
         }
 
         .form-control::placeholder,
-        input::placeholder {
-            color: rgba(245,240,232,0.45);
+        input::placeholder,
+        textarea::placeholder {
+            color: rgba(245,240,232,0.52) !important;
+            opacity: 1 !important;
         }
 
         .form-control option,
@@ -435,6 +439,24 @@
             background-color: rgba(255,255,255,0.02);
             border-color: rgba(255,255,255,0.18);
             accent-color: var(--admin-gold);
+        }
+
+        body,
+        .admin-shell,
+        .admin-sidebar,
+        .admin-main,
+        .admin-page,
+        .card,
+        .table,
+        .table-responsive,
+        .alert,
+        .badge-status,
+        .btn,
+        .form-label,
+        .form-check-label,
+        h1, h2, h3, h4, h5, h6,
+        p, span, label, td, th, li, a {
+            color: var(--admin-text) !important;
         }
 
         .form-check-label {
