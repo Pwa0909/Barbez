@@ -112,10 +112,20 @@
     #horario-calendar .datepicker .datepicker-switch,
     #horario-calendar .datepicker .prev,
     #horario-calendar .datepicker .next,
-    #horario-calendar .datepicker tfoot th {
+    #horario-calendar .datepicker tfoot th,
+    #horario-calendar .datepicker .datepicker-title,
+    #horario-calendar .datepicker .dow,
+    #horario-calendar .datepicker .month,
+    #horario-calendar .datepicker .year {
         color: #f0d58d;
         font-weight: 700;
         text-transform: uppercase;
+    }
+
+    #horario-calendar .datepicker .disabled,
+    #horario-calendar .datepicker .disabled:hover {
+        color: rgba(255,255,255,0.35) !important;
+        background: rgba(255,255,255,0.02) !important;
     }
 </style>
 
@@ -154,6 +164,18 @@
             $noResults.toggle(visibleCount === 0);
         }
 
+        $.fn.datepicker.dates['pt-BR'] = {
+            days: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'],
+            daysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+            daysMin: ['Do', 'Se', 'Te', 'Qa', 'Qi', 'Se', 'Sa'],
+            months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            today: 'Hoje',
+            clear: 'Limpar',
+            titleFormat: 'MM yyyy',
+            weekStart: 0
+        };
+
         $calendar.off('changeDate.barberzDatepicker');
 
         if ($calendar.data('datepicker')) {
@@ -162,6 +184,7 @@
 
         $calendar.datepicker({
             format: 'yyyy-mm-dd',
+            language: 'pt-BR',
             todayHighlight: true,
             autoclose: true,
             inline: true,
