@@ -16,7 +16,14 @@ class ClienteRequest extends FormRequest
         return [
             'nome' => 'required|max:100',
             'telefone' => 'required|max:20',
-            'email' => 'required|email|max:100'
+            'email' => ['required', 'email', 'max:100', 'regex:/^[A-Za-z0-9._%+-]+@gmail\.com$/i']
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'email.regex' => 'O e-mail deve terminar com @gmail.com.',
         ];
     }
 }

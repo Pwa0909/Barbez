@@ -25,8 +25,10 @@ class ClienteController extends Controller
         $validated = $request->validate([
             'nome' => 'required|max:100',
             'telefone' => 'nullable|max:20',
-            'email' => 'required|email|unique:clientes,email',
+            'email' => ['required', 'email', 'unique:clientes,email', 'regex:/^[A-Za-z0-9._%+-]+@gmail\.com$/i'],
             'senha' => 'required|string|min:6'
+        ], [
+            'email.regex' => 'O e-mail deve terminar com @gmail.com.',
         ]);
 
         $validated['senha'] = Hash::make($validated['senha']);
@@ -58,8 +60,10 @@ class ClienteController extends Controller
         $validated = $request->validate([
             'nome' => 'required|max:100',
             'telefone' => 'nullable|max:20',
-            'email' => 'required|email|unique:clientes,email,' . $cliente->id,
+            'email' => ['required', 'email', 'unique:clientes,email,' . $cliente->id, 'regex:/^[A-Za-z0-9._%+-]+@gmail\.com$/i'],
             'senha' => 'nullable|string|min:6'
+        ], [
+            'email.regex' => 'O e-mail deve terminar com @gmail.com.',
         ]);
 
         if (!empty($validated['senha'])) {

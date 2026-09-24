@@ -31,7 +31,7 @@
 
                     <div class="mb-4">
                         <label class="form-label-gold">E-mail</label>
-                        <input type="email" name="email" class="input-gold form-control" value="{{ old('email') }}" required autofocus>
+                        <input type="email" name="email" class="input-gold form-control" value="{{ old('email') }}" pattern=".+@gmail\.com" title="Use um e-mail do Gmail (@gmail.com)" required autofocus>
                     </div>
 
                     <div class="mb-4">

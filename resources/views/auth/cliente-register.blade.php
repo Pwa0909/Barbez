@@ -41,7 +41,7 @@
 
                     <div class="mb-4">
                         <label class="form-label-gold">E-mail</label>
-                        <input type="email" name="email" class="input-gold form-control" value="{{ old('email') }}" required>
+                        <input type="email" name="email" class="input-gold form-control" value="{{ old('email') }}" pattern=".+@gmail\.com" title="Use um e-mail do Gmail (@gmail.com)" required>
                     </div>
 
                     <div class="mb-4">

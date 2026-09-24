@@ -16,8 +16,10 @@ class ClienteAuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'regex:/^[A-Za-z0-9._%+-]+@gmail\.com$/i'],
             'password' => ['required'],
+        ], [
+            'email.regex' => 'O e-mail deve terminar com @gmail.com.',
         ]);
 
         if (Auth::guard('cliente')->attempt($credentials, $request->boolean('remember'))) {
@@ -40,8 +42,10 @@ class ClienteAuthController extends Controller
         $data = $request->validate([
             'nome' => ['required', 'string', 'max:255'],
             'telefone' => ['nullable', 'string', 'max:20'],
-            'email' => ['required', 'email', 'max:255', 'unique:clientes,email'],
+            'email' => ['required', 'email', 'max:255', 'unique:clientes,email', 'regex:/^[A-Za-z0-9._%+-]+@gmail\.com$/i'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ], [
+            'email.regex' => 'O e-mail deve terminar com @gmail.com.',
         ]);
 
         $cliente = \App\Models\Cliente::create([
