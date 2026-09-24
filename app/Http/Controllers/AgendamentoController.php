@@ -25,6 +25,7 @@ class AgendamentoController extends Controller
         $this->ensureUpcomingSchedules();
         $servicos = Servico::all();
         $horarios = HorarioDisponivel::where('disponivel', true)
+            ->whereDate('data', '>=', Carbon::today()->toDateString())
             ->orderBy('data')
             ->orderBy('hora')
             ->get()
@@ -41,22 +42,22 @@ class AgendamentoController extends Controller
 
     private function ensureUpcomingSchedules(): void
     {
-        $inicioDoMes = Carbon::today()->startOfMonth();
-        $fimDoMes = Carbon::today()->endOfMonth();
+        $inicio = Carbon::today();
+        $fim = Carbon::today()->addMonths(2)->endOfMonth();
 
-        $existeHorarioNoMes = HorarioDisponivel::where('disponivel', true)
-            ->whereBetween('data', [$inicioDoMes->toDateString(), $fimDoMes->toDateString()])
+        $existemHorariosFuturos = HorarioDisponivel::where('disponivel', true)
+            ->whereBetween('data', [$inicio->toDateString(), $fim->toDateString()])
             ->exists();
 
-        if ($existeHorarioNoMes) {
+        if ($existemHorariosFuturos) {
             return;
         }
 
         $barbeiros = Barbeiro::where('ativo', true)->get();
         $horarios = [];
 
-        $data = $inicioDoMes->copy();
-        while ($data->lte($fimDoMes)) {
+        $data = $inicio->copy();
+        while ($data->lte($fim)) {
             if ($data->isSunday()) {
                 $data->addDay();
                 continue;

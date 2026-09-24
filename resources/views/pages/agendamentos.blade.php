@@ -457,7 +457,7 @@
 
         var hoje = new Date();
         var primeiroDiaDoMes = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
-        var ultimoDiaDoMes = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0);
+        var ultimoDiaDoMes = new Date(hoje.getFullYear(), hoje.getMonth() + 2, 0);
 
         $picker.datepicker({
             format: 'yyyy-mm-dd',
@@ -465,7 +465,7 @@
             todayHighlight: true,
             autoclose: true,
             inline: true,
-            startDate: primeiroDiaDoMes,
+            startDate: hoje,
             endDate: ultimoDiaDoMes,
             daysOfWeekDisabled: [0],
             numberOfMonths: 1,
