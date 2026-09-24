@@ -455,6 +455,18 @@
             weekStart: 0
         };
 
+        $picker.on('show', function () {
+            var $header = $picker.find('.datepicker-switch');
+            if (!$header.length) {
+                return;
+            }
+
+            var mesAtual = hoje.getMonth();
+            var anoAtual = hoje.getFullYear();
+            var nomeMes = $.fn.datepicker.dates['pt-BR'].months[mesAtual];
+            $header.text(nomeMes + ' ' + anoAtual);
+        });
+
         var hoje = new Date();
         var primeiroDiaDoMes = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
         var ultimoDiaDoMes = new Date(hoje.getFullYear(), hoje.getMonth() + 2, 0);
