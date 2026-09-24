@@ -224,10 +224,16 @@
         margin: 0;
     }
 
+    #horario-datepicker .datepicker {
+        max-width: 360px;
+        margin: 0 auto;
+    }
+
     #horario-datepicker .datepicker .datepicker-switch,
     #horario-datepicker .datepicker .prev,
     #horario-datepicker .datepicker .datepicker-months,
-    #horario-datepicker .datepicker .datepicker-years {
+    #horario-datepicker .datepicker .datepicker-years,
+    #horario-datepicker .datepicker .datepicker-decades {
         display: none !important;
     }
 
@@ -352,6 +358,7 @@
             $picker.datepicker('remove');
         }
 
+        $picker.empty();
         $picker.attr('data-barberz-datepicker', '1');
 
         var selectedDate = null;
@@ -393,7 +400,9 @@
             clearBtn: false,
             weekStart: 0,
             minViewMode: 'days',
-            maxViewMode: 'months'
+            maxViewMode: 'days',
+            viewMode: 'days',
+            showDaysOfWeek: true
         }).on('changeDate.barberzDatepicker', function (e) {
             selectedDate = e.format('yyyy-mm-dd');
             var visibleCount = 0;
