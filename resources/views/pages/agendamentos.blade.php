@@ -199,11 +199,10 @@
     #horario-datepicker .datepicker {
         width: 100%;
         max-width: 100%;
-        background: rgba(12, 12, 12, 0.96);
-        border: 1px solid rgba(201, 168, 76, 0.18);
-        border-radius: 1.2rem;
-        padding: 1rem;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 0.75rem;
+        background: #fff;
+        box-shadow: 0 12px 24px rgba(0,0,0,0.08);
     }
 
     @media (max-width: 576px) {
@@ -219,93 +218,50 @@
     #horario-datepicker .datepicker table {
         width: 100%;
         border-collapse: separate;
-        border-spacing: 0.35rem;
+        border-spacing: 0.25rem;
         margin: 0;
+    }
+
+    #horario-datepicker .datepicker td,
+    #horario-datepicker .datepicker th {
+        border: none;
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+    }
+
+    #horario-datepicker .datepicker td.day {
+        background: #fff;
+        color: #1f1f1f;
+    }
+
+    #horario-datepicker .datepicker td.day:hover,
+    #horario-datepicker .datepicker td.day.focused {
+        background: #f5f5f5;
+        color: #111;
+    }
+
+    #horario-datepicker .datepicker td.active,
+    #horario-datepicker .datepicker td.active:hover {
+        background: #c9a84c;
+        color: #111;
     }
 
     #horario-datepicker .datepicker .datepicker-switch,
     #horario-datepicker .datepicker .prev,
     #horario-datepicker .datepicker .next,
-    #horario-datepicker .datepicker tfoot tr th {
-        color: #f0d58d;
+    #horario-datepicker .datepicker tfoot th {
+        color: #333;
         font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
         background: transparent;
-    }
-
-    #horario-datepicker .datepicker .datepicker-switch:hover,
-    #horario-datepicker .datepicker .prev:hover,
-    #horario-datepicker .datepicker .next:hover,
-    #horario-datepicker .datepicker tfoot tr th:hover {
-        background: rgba(201, 168, 76, 0.12);
-        color: #fff4d1;
-    }
-
-    #horario-datepicker .datepicker th,
-    #horario-datepicker .datepicker td {
-        border: none;
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 0.75rem;
-        font-weight: 600;
-    }
-
-    #horario-datepicker .datepicker thead th {
-        color: rgba(255,255,255,0.72);
-        font-size: 0.72rem;
-        padding: 0.4rem 0;
-    }
-
-    #horario-datepicker .datepicker td.day {
-        background: rgba(255,255,255,0.02);
-        color: #f5f0e8;
-        transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    #horario-datepicker .datepicker td.day:hover,
-    #horario-datepicker .datepicker td.day.focused {
-        background: rgba(201, 168, 76, 0.12);
-        color: #fff;
-        transform: translateY(-1px);
-        box-shadow: 0 8px 18px rgba(201, 168, 76, 0.08);
-    }
-
-    #horario-datepicker .datepicker td.old,
-    #horario-datepicker .datepicker td.new {
-        color: rgba(245,240,232,0.35);
-        display: none !important;
     }
 
     #horario-datepicker .datepicker td.disabled,
     #horario-datepicker .datepicker td.disabled:hover {
-        background: rgba(255,255,255,0.02);
-        color: rgba(255,255,255,0.2);
+        background: #f7f7f7;
+        color: #b0b0b0;
         cursor: not-allowed;
-    }
-
-    #horario-datepicker .datepicker td.active,
-    #horario-datepicker .datepicker td.active:hover {
-        background: linear-gradient(135deg, #d7bb66, #c9a84c 45%, #b8922a);
-        color: #101010;
-        box-shadow: 0 12px 26px rgba(201, 168, 76, 0.22);
-        text-shadow: none;
-    }
-
-    #horario-datepicker .datepicker td.today,
-    #horario-datepicker .datepicker td.today:hover {
-        background: rgba(201, 168, 76, 0.14);
-        border: 1px solid rgba(201, 168, 76, 0.4);
-        color: #f0d58d;
-    }
-
-    #horario-datepicker .datepicker td.range {
-        background: rgba(201, 168, 76, 0.08);
-    }
-
-    #horario-datepicker .datepicker-dropdown:before,
-    #horario-datepicker .datepicker-dropdown:after {
-        display: none;
     }
 
     #horario-datepicker + .datepicker {

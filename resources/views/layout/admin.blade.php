@@ -571,5 +571,31 @@
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function formatPhone(value) {
+                var digits = (value || '').replace(/\D/g, '').slice(0, 11);
+
+                if (digits.length <= 2) {
+                    return digits;
+                }
+
+                if (digits.length <= 7) {
+                    return '(' + digits.slice(0, 2) + ') ' + digits.slice(2);
+                }
+
+                return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 7) + '-' + digits.slice(7, 11);
+            }
+
+            document.querySelectorAll('input[name="telefone"], input[name="celular"]').forEach(function (input) {
+                input.setAttribute('inputmode', 'numeric');
+                input.setAttribute('maxlength', '15');
+
+                input.addEventListener('input', function () {
+                    input.value = formatPhone(input.value);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
