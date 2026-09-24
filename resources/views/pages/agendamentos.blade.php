@@ -226,6 +226,11 @@
 
     #horario-datepicker .datepicker .datepicker-switch,
     #horario-datepicker .datepicker .prev,
+    #horario-datepicker .datepicker .datepicker-months,
+    #horario-datepicker .datepicker .datepicker-years {
+        display: none !important;
+    }
+
     #horario-datepicker .datepicker .next,
     #horario-datepicker .datepicker tfoot tr th {
         color: #f0d58d;
@@ -235,8 +240,6 @@
         background: transparent;
     }
 
-    #horario-datepicker .datepicker .datepicker-switch:hover,
-    #horario-datepicker .datepicker .prev:hover,
     #horario-datepicker .datepicker .next:hover,
     #horario-datepicker .datepicker tfoot tr th:hover {
         background: rgba(201, 168, 76, 0.12);
@@ -386,7 +389,11 @@
             daysOfWeekDisabled: [0],
             numberOfMonths: 1,
             calendarWeeks: false,
-            orientation: 'bottom'
+            orientation: 'bottom',
+            clearBtn: false,
+            weekStart: 0,
+            minViewMode: 'days',
+            maxViewMode: 'months'
         }).on('changeDate.barberzDatepicker', function (e) {
             selectedDate = e.format('yyyy-mm-dd');
             var visibleCount = 0;
