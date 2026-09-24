@@ -322,13 +322,13 @@
 
         var $picker = $('#horario-datepicker');
 
-        if (window.__barberzDatepickerInitialized === 'horario-datepicker') {
+        if ($picker.attr('data-barberz-datepicker') === '1') {
             if ($picker.data('datepicker')) {
                 $picker.datepicker('remove');
             }
             $picker.find('.datepicker').remove();
             $picker.next('.datepicker').remove();
-            return;
+            $picker.removeAttr('data-barberz-datepicker');
         }
 
         $('.datepicker').each(function () {
@@ -349,7 +349,7 @@
             $picker.datepicker('remove');
         }
 
-        window.__barberzDatepickerInitialized = 'horario-datepicker';
+        $picker.attr('data-barberz-datepicker', '1');
 
         var selectedDate = null;
         var $cards = $('.horario-card');
