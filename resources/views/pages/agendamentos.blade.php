@@ -49,6 +49,22 @@
                     </select>
                 </div>
 
+                <div id="agendamento-resumo" class="resumo-box mb-4 d-none">
+                    <div class="resumo-label">Resumo do agendamento</div>
+                    <div class="resumo-item">
+                        <span>Serviço</span>
+                        <strong id="resumo-servico">-</strong>
+                    </div>
+                    <div class="resumo-item">
+                        <span>Data</span>
+                        <strong id="resumo-data">-</strong>
+                    </div>
+                    <div class="resumo-item">
+                        <span>Horário</span>
+                        <strong id="resumo-horario">-</strong>
+                    </div>
+                </div>
+
                 <div id="horario-calendar-screen" class="mb-4">
                     <label class="form-label-gold">Selecione o dia</label>
                     <div class="calendar-box rounded-4 p-3 bg-black border border-white-10 mb-3">
@@ -166,6 +182,38 @@
         background: rgba(255,255,255,.025);
         border: 1px solid rgba(201,168,76,0.14);
         border-radius: 1.2rem;
+    }
+    .resumo-box {
+        background: rgba(201,168,76,0.06);
+        border: 1px solid rgba(201,168,76,0.2);
+        border-radius: 1rem;
+        padding: 1rem 1.1rem;
+        color: #f5f0e8;
+    }
+    .resumo-label {
+        font-size: .72rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(201,168,76,.9);
+        margin-bottom: .75rem;
+        font-weight: 600;
+    }
+    .resumo-item {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: .5rem 0;
+        border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .resumo-item:last-child {
+        border-bottom: none;
+    }
+    .resumo-item span {
+        color: rgba(245,240,232,.7);
+    }
+    .resumo-item strong {
+        color: #fff;
+        text-align: right;
     }
     .horario-card:hover {
         transform: translateY(-2px);
@@ -362,9 +410,35 @@
         $picker.attr('data-barberz-datepicker', '1');
 
         var selectedDate = null;
+        var selectedHorario = null;
         var $cards = $('.horario-card');
         var $message = $('#horario-no-results');
+        var $submitButton = $('button[type="submit"]');
+        var $resumoBox = $('#agendamento-resumo');
+        var $resumoServico = $('#resumo-servico');
+        var $resumoData = $('#resumo-data');
+        var $resumoHorario = $('#resumo-horario');
 
+        function updateSummary() {
+            var servico = $('select[name="servico_id"] option:selected').text();
+            servico = servico ? servico.replace(/\s*-\s*R\$.*$/, '').trim() : '';
+
+            if (servico || selectedDate || selectedHorario) {
+                $resumoBox.removeClass('d-none');
+            }
+
+            $resumoServico.text(servico || '-');
+            $resumoData.text(selectedDate ? formatDate(selectedDate) : '-');
+            $resumoHorario.text(selectedHorario || '-');
+
+            var hasServico = !!$('select[name="servico_id"]').val();
+            var hasDate = !!selectedDate;
+            var hasHorario = !!selectedHorario;
+            $submitButton.prop('disabled', !(hasServico && hasDate && hasHorario));
+            $submitButton.css('opacity', (hasServico && hasDate && hasHorario) ? '1' : '0.6');
+        }
+
+        $('select[name="servico_id"]').on('change.barberzDatepicker', updateSummary);
         $picker.off('changeDate.barberzDatepicker');
         $('#horario-back-button').off('click.barberzDatepicker');
         $cards.off('click.barberzDatepicker');
@@ -405,6 +479,7 @@
             showDaysOfWeek: true
         }).on('changeDate.barberzDatepicker', function (e) {
             selectedDate = e.format('yyyy-mm-dd');
+            selectedHorario = null;
             var visibleCount = 0;
 
             $cards.each(function () {
@@ -423,6 +498,7 @@
             $('#horario-calendar-screen').addClass('d-none');
             $('#horario-times-screen').removeClass('d-none');
             $message.toggle(visibleCount === 0);
+            updateSummary();
         });
 
         $('#horario-back-button').on('click.barberzDatepicker', function () {
@@ -430,12 +506,18 @@
             $('#horario-calendar-screen').removeClass('d-none');
             $cards.addClass('d-none');
             $('#horario-no-results').addClass('d-none');
+            selectedHorario = null;
+            updateSummary();
         });
+
+        updateSummary();
 
         $cards.on('click.barberzDatepicker', function () {
             $(this).find('input').prop('checked', true);
             $cards.removeClass('selected');
             $(this).addClass('selected');
+            selectedHorario = $(this).find('.horario-time').text();
+            updateSummary();
         });
 
         $('form[action="{{ route('agendamentos.store') }}"]').off('submit.barberzDatepicker').on('submit.barberzDatepicker', function (event) {
