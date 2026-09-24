@@ -380,6 +380,7 @@
             language: 'pt-BR',
             todayHighlight: true,
             autoclose: true,
+            inline: true,
             startDate: primeiroDiaDoMes,
             endDate: ultimoDiaDoMes,
             daysOfWeekDisabled: [0],
