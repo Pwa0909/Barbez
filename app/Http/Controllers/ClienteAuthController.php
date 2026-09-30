@@ -16,10 +16,13 @@ class ClienteAuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email', 'regex:/^[A-Za-z0-9._%+-]+@gmail\.com$/i'],
+            'email' => ['required', 'email', 'regex:/^(?:[A-Za-z0-9._%+-]+@gmail\.com|admin@barbearia\.com)$/i'],
             'password' => ['required'],
         ], [
-            'email.regex' => 'O e-mail deve terminar com @gmail.com.',
+            'email.required' => 'O e-mail é obrigatório.',
+            'email.email' => 'Informe um e-mail válido.',
+            'email.regex' => 'O e-mail deve terminar com @gmail.com ou ser o e-mail do admin.',
+            'password.required' => 'A senha é obrigatória.',
         ]);
 
         if (Auth::guard('cliente')->attempt($credentials, $request->boolean('remember'))) {
@@ -42,10 +45,19 @@ class ClienteAuthController extends Controller
         $data = $request->validate([
             'nome' => ['required', 'string', 'max:255'],
             'telefone' => ['nullable', 'string', 'max:20'],
-            'email' => ['required', 'email', 'max:255', 'unique:clientes,email', 'regex:/^[A-Za-z0-9._%+-]+@gmail\.com$/i'],
+            'email' => ['required', 'email', 'max:255', 'unique:clientes,email', 'regex:/^(?:[A-Za-z0-9._%+-]+@gmail\.com|admin@barbearia\.com)$/i'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ], [
-            'email.regex' => 'O e-mail deve terminar com @gmail.com.',
+            'nome.required' => 'O nome é obrigatório.',
+            'telefone.max' => 'O telefone deve ter no máximo 20 caracteres.',
+            'email.required' => 'O e-mail é obrigatório.',
+            'email.email' => 'Informe um e-mail válido.',
+            'email.unique' => 'Este e-mail já está cadastrado.',
+            'email.max' => 'O e-mail deve ter no máximo 255 caracteres.',
+            'email.regex' => 'O e-mail deve terminar com @gmail.com ou ser o e-mail do admin.',
+            'password.required' => 'A senha é obrigatória.',
+            'password.min' => 'A senha deve ter pelo menos 6 caracteres.',
+            'password.confirmed' => 'A confirmação da senha não confere.',
         ]);
 
         $cliente = \App\Models\Cliente::create([

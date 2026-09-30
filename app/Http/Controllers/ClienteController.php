@@ -25,10 +25,18 @@ class ClienteController extends Controller
         $validated = $request->validate([
             'nome' => 'required|max:100',
             'telefone' => 'nullable|max:20',
-            'email' => ['required', 'email', 'unique:clientes,email', 'regex:/^[A-Za-z0-9._%+-]+@gmail\.com$/i'],
+            'email' => ['required', 'email', 'unique:clientes,email', 'regex:/^(?:[A-Za-z0-9._%+-]+@gmail\.com|admin@barbearia\.com)$/i'],
             'senha' => 'required|string|min:6'
         ], [
-            'email.regex' => 'O e-mail deve terminar com @gmail.com.',
+            'nome.required' => 'O nome é obrigatório.',
+            'nome.max' => 'O nome deve ter no máximo 100 caracteres.',
+            'telefone.max' => 'O telefone deve ter no máximo 20 caracteres.',
+            'email.required' => 'O e-mail é obrigatório.',
+            'email.email' => 'Informe um e-mail válido.',
+            'email.unique' => 'Este e-mail já está cadastrado.',
+            'email.regex' => 'O e-mail deve terminar com @gmail.com ou ser o e-mail do admin.',
+            'senha.required' => 'A senha é obrigatória.',
+            'senha.min' => 'A senha deve ter pelo menos 6 caracteres.',
         ]);
 
         $validated['senha'] = Hash::make($validated['senha']);
@@ -60,10 +68,17 @@ class ClienteController extends Controller
         $validated = $request->validate([
             'nome' => 'required|max:100',
             'telefone' => 'nullable|max:20',
-            'email' => ['required', 'email', 'unique:clientes,email,' . $cliente->id, 'regex:/^[A-Za-z0-9._%+-]+@gmail\.com$/i'],
+            'email' => ['required', 'email', 'unique:clientes,email,' . $cliente->id, 'regex:/^(?:[A-Za-z0-9._%+-]+@gmail\.com|admin@barbearia\.com)$/i'],
             'senha' => 'nullable|string|min:6'
         ], [
-            'email.regex' => 'O e-mail deve terminar com @gmail.com.',
+            'nome.required' => 'O nome é obrigatório.',
+            'nome.max' => 'O nome deve ter no máximo 100 caracteres.',
+            'telefone.max' => 'O telefone deve ter no máximo 20 caracteres.',
+            'email.required' => 'O e-mail é obrigatório.',
+            'email.email' => 'Informe um e-mail válido.',
+            'email.unique' => 'Este e-mail já está cadastrado.',
+            'email.regex' => 'O e-mail deve terminar com @gmail.com ou ser o e-mail do admin.',
+            'senha.min' => 'A senha deve ter pelo menos 6 caracteres.',
         ]);
 
         if (!empty($validated['senha'])) {

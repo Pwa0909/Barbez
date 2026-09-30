@@ -17,14 +17,22 @@ class AuthController extends Controller
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+        ], [
+            'email.required' => 'O e-mail é obrigatório.',
+            'email.email' => 'Informe um e-mail válido.',
+            'password.required' => 'A senha é obrigatória.',
         ]);
 
-        $email = strtolower(trim($credentials['email']));
-        $adminEmail = 'admin@barbearia.com';
+        $guard = null;
 
-        $guard = $email === $adminEmail ? 'web' : 'cliente';
+        foreach (['web', 'cliente'] as $candidate) {
+            if (Auth::guard($candidate)->attempt($credentials, $request->boolean('remember'))) {
+                $guard = $candidate;
+                break;
+            }
+        }
 
-        if (Auth::guard($guard)->attempt($credentials, $request->boolean('remember'))) {
+        if ($guard) {
             $request->session()->regenerate();
 
             return redirect()->intended(
@@ -33,9 +41,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => $guard === 'web'
-                ? 'Credenciais inválidas para admin.'
-                : 'Credenciais inválidas para cliente.',
+            'email' => 'Credenciais inválidas.',
         ])->onlyInput('email');
     }
 

@@ -24,4 +24,28 @@ class ExampleTest extends TestCase
         $response->assertRedirect();
         $this->assertStringEndsWith('/login', $response->headers->get('Location'));
     }
+
+    public function test_cliente_register_requires_gmail_email(): void
+    {
+        $response = $this->post('/register/cliente', [
+            'nome' => 'Cliente Teste',
+            'telefone' => '(11) 99999-9999',
+            'email' => 'cliente@outlook.com',
+            'password' => 'senha123',
+            'password_confirmation' => 'senha123',
+        ]);
+
+        $response->assertSessionHasErrors('email');
+
+        $validResponse = $this->post('/register/cliente', [
+            'nome' => 'Cliente Gmail',
+            'telefone' => '(11) 99999-9999',
+            'email' => 'cliente@gmail.com',
+            'password' => 'senha123',
+            'password_confirmation' => 'senha123',
+        ]);
+
+        $validResponse->assertRedirect();
+        $this->assertDatabaseHas('clientes', ['email' => 'cliente@gmail.com']);
+    }
 }

@@ -19,7 +19,49 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
-<body>
+<body style="background: #070707; color: #F5F0E8; font-family: 'DM Sans', sans-serif;">
+
+<style>
+    body { background: linear-gradient(180deg, #070707 0%, #0d0d0d 100%); }
+    .alert {
+        border-radius: 1rem;
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    }
+    .alert-danger {
+        background: rgba(140, 28, 28, 0.12);
+        border-color: rgba(220, 53, 69, 0.45);
+        color: #ffe6e8;
+    }
+    .alert-warning {
+        background: rgba(201, 168, 76, 0.08);
+        border-color: rgba(201, 168, 76, 0.28);
+        color: #f5e9c9;
+    }
+    .btn-gold {
+        background: linear-gradient(135deg, #d7bb66 0%, #c9a84c 45%, #b9912e 100%);
+        color: #0f0f0f !important;
+        border: none;
+        box-shadow: 0 12px 28px rgba(201, 168, 76, 0.22);
+    }
+    .btn-gold:hover {
+        background: linear-gradient(135deg, #e5cc81 0%, #d3b257 45%, #c39a31 100%);
+        color: #0f0f0f !important;
+    }
+    .btn-outline-light {
+        border-color: rgba(255,255,255,0.18);
+        color: #f5f0e8;
+    }
+    .btn-outline-light:hover {
+        background: rgba(255,255,255,0.04);
+        border-color: rgba(201,168,76,0.6);
+        color: #fff;
+    }
+    .form-control:focus, .form-select:focus {
+        border-color: rgba(201, 168, 76, 0.7) !important;
+        box-shadow: 0 0 0 0.2rem rgba(201, 168, 76, 0.12) !important;
+    }
+</style>
 
 <div class="site-wrap">
 
