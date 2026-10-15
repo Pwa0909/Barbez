@@ -56,3 +56,9 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## API do aplicativo BarberPoint
+
+O app nativo usa a API em `/api/mobile`. Ela compartilha clientes, serviços, horários e agendamentos com o site e autentica com tokens Bearer de validade limitada. Após publicar uma atualização, aplique as migrations existentes com `php artisan migrate --force` no ambiente Wasmer. Não execute os seeders no banco de produção.
+
+Rotas: `GET /api/mobile/status`, `POST /api/mobile/usuarios`, `POST /api/mobile/login`, `GET /api/mobile/servicos`, `GET /api/mobile/agendamentos`, `POST /api/mobile/agendamentos`, `DELETE /api/mobile/agendamentos/{id}` e `POST /api/mobile/logout`. Serviços e agendamentos exigem autenticação.
