@@ -16,7 +16,7 @@ jobs:
   trigger: post-deployment
   action:
     execute:
-      command: after_deploy
+      command: php artisan migrate --force
 annotations:
   anybuild.run/config:
     composer_build_script: post-update-cmd
@@ -29,7 +29,9 @@ annotations:
     php_framework: laravel
     php_public_dir: public
     phpix: true
+    npm_version: '11'
   anybuild.run/provider: laravel
-  anybuild.run/version: 0.28.4
-  wasmer.io/version: 7.4.1
+  anybuild.run/version: 0.33.0
+  wasmer.io/version: 7.5.0
 enableDatabase: true
+enable_email: true
