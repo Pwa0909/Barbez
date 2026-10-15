@@ -16,20 +16,22 @@ jobs:
   trigger: post-deployment
   action:
     execute:
-      command: php artisan migrate --force
+      command: after_deploy
 annotations:
   anybuild.run/config:
     composer_build_script: post-update-cmd
     composer_enable: true
     name: out
+    commands:
+      after_deploy: php artisan migrate --force
     node_build_command: npm run build
     node_install_inputs:
     - package.json
     node_package_manager: npm
+    npm_version: '11'
     php_framework: laravel
     php_public_dir: public
     phpix: true
-    npm_version: '11'
   anybuild.run/provider: laravel
   anybuild.run/version: 0.33.0
   wasmer.io/version: 7.5.0
